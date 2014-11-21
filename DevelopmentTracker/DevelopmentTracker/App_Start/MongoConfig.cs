@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using DevelopmentTracker.Classes;
 using DevelopmentTracker.Models;
@@ -20,21 +22,21 @@ namespace DevelopmentTracker
                     Status = "Not complete",
                     Title = "Fix Banner",
                     Description = "This is the description",
-                    Created = "20/11/2014"
+                    Created = DateTime.Now
                 },
                 new Story
                 {
                     Status = "Not complete",
                     Title = "Fix Banner 2",
                     Description = "This is the description",
-                    Created = "20/11/2014"
+                    Created = DateTime.Now
                 },
                 new Story
                 {
                     Status = "Not complete",
                     Title = "Fix Banner 3",
                     Description = "This is the description",
-                    Created = "20/11/2014"
+                    Created = DateTime.Now
                 }
             };
 

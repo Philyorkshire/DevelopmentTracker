@@ -22,7 +22,7 @@ namespace DevelopmentTracker.Tests.Controllers
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(3, result.Count());
+            Assert.AreEqual(2, result.Count());
         }
 
         //TODO: Implement test.
@@ -31,7 +31,6 @@ namespace DevelopmentTracker.Tests.Controllers
         {
             // Arrange
             var controller = new StoryController();
-
         }
     }
 }

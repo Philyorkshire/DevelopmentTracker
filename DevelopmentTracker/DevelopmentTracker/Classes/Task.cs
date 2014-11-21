@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using System;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace DevelopmentTracker.Classes
@@ -11,6 +12,8 @@ namespace DevelopmentTracker.Classes
         public string Title { get; set; }
         public string Description { get; set; }
         public string Status { get; set; }
-        public string Created { get; set; }
+
+        [BsonDateTimeOptions(Representation = BsonType.Document)]
+        public DateTime Created { get; set; }
     }
 }

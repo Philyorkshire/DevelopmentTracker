@@ -1,3 +1,4 @@
+C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker.Tests\obj\Debug\DevelopmentTracker.Tests.csprojResolveAssemblyReference.cache
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker.Tests\bin\Debug\DevelopmentTracker.Tests.dll.config
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker.Tests\bin\Debug\DevelopmentTracker.Tests.dll
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker.Tests\bin\Debug\DevelopmentTracker.Tests.pdb
@@ -11,8 +12,8 @@ C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\Developm
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker.Tests\bin\Debug\System.Web.WebPages.dll
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker.Tests\bin\Debug\System.Web.WebPages.Razor.dll
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker.Tests\bin\Debug\System.Web.Optimization.dll
-C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker.Tests\bin\Debug\WebGrease.dll
-C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker.Tests\bin\Debug\Antlr3.Runtime.dll
+C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker.Tests\bin\Debug\MongoDB.Driver.dll
+C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker.Tests\bin\Debug\MongoDB.Bson.dll
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker.Tests\bin\Debug\DevelopmentTracker.pdb
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker.Tests\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker.Tests\bin\Debug\System.Web.Helpers.xml
@@ -21,10 +22,7 @@ C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\Developm
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker.Tests\bin\Debug\System.Web.WebPages.xml
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker.Tests\bin\Debug\System.Web.WebPages.Deployment.xml
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker.Tests\bin\Debug\System.Web.WebPages.Razor.xml
-C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker.Tests\obj\Debug\DevelopmentTracker.Tests.csprojResolveAssemblyReference.cache
-C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker.Tests\obj\Debug\DevelopmentTracker.Tests.dll
-C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker.Tests\obj\Debug\DevelopmentTracker.Tests.pdb
-C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker.Tests\bin\Debug\MongoDB.Driver.dll
-C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker.Tests\bin\Debug\MongoDB.Bson.dll
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker.Tests\bin\Debug\MongoDB.Driver.xml
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker.Tests\bin\Debug\MongoDB.Bson.xml
+C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker.Tests\obj\Debug\DevelopmentTracker.Tests.dll
+C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker.Tests\obj\Debug\DevelopmentTracker.Tests.pdb
