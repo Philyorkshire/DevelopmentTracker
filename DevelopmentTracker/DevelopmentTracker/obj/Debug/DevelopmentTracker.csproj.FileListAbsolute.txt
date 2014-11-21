@@ -18,4 +18,7 @@ C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\Developm
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker\bin\System.Web.WebPages.Razor.xml
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker\obj\Debug\DevelopmentTracker.dll
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker\obj\Debug\DevelopmentTracker.pdb
+<<<<<<< HEAD
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker\obj\Debug\DevelopmentTracker.csprojResolveAssemblyReference.cache
+=======
+>>>>>>> parent of a74a43d... get stories by id
