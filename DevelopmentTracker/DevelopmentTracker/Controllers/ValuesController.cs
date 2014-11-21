@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Web.Http;
 
 namespace DevelopmentTracker.Controllers
@@ -14,7 +15,7 @@ namespace DevelopmentTracker.Controllers
         // GET api/values/5
         public string Get(int id)
         {
-            return "value";
+            return "value" + " " + id.ToString(CultureInfo.InvariantCulture);
         }
 
         // POST api/values

@@ -24,3 +24,7 @@ C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\Developm
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker\obj\Debug\DevelopmentTracker.csprojResolveAssemblyReference.cache
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker\obj\Debug\DevelopmentTracker.dll
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker\obj\Debug\DevelopmentTracker.pdb
+C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker\bin\MongoDB.Bson.dll
+C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker\bin\MongoDB.Driver.dll
+C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker\bin\MongoDB.Bson.xml
+C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\DevelopmentTracker\DevelopmentTracker\bin\MongoDB.Driver.xml
