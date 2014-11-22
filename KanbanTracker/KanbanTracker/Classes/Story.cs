@@ -1,6 +1,6 @@
 ﻿﻿namespace KanbanTracker.Classes
  {
-     public class Story : Task
+     public class Story :Task
      {
 
      }

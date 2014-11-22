@@ -14,7 +14,7 @@ namespace KanbanTracker.Controllers
 
     public class StoryController : ApiController
     {
-        private readonly MongoCollection<Story> _open;
+        private MongoCollection<Story> _open;
 
         public StoryController()
         {
@@ -35,18 +35,17 @@ namespace KanbanTracker.Controllers
 
         public HttpResponseMessage PostStory([FromBody]Story story)
         {
+            var entry = new Story
+            {
+                Title = story.Title,
+                Description = story.Description,
+                Status = story.Status,
+                Created = DateTime.Now
+            };
+
             try
             {
-                var entry = new Story
-                {
-                    Title = story.Title,
-                    Description = story.Description,
-                    Status = story.Status,
-                    Created = DateTime.Now
-                };
-
                 _open.Insert(entry);
-
                 return Request.CreateResponse(HttpStatusCode.Accepted, entry);
             }
 
@@ -57,16 +56,21 @@ namespace KanbanTracker.Controllers
             }
         }
 
+        [Route("api/story/{id}")]
         public HttpResponseMessage PostStoryUpdate(string id, [FromBody]Story story)
         {
+
             try
             {
-                _open.Update(
-                    Query.EQ(name: "_id", value: id),
-                    Update.Set("title", story.Title)
-                    );
+                var query = Query<Story>.EQ(s => s.Id, (id));
+                var update = Update<Story>
+                    .Set(s => s.Title, story.Title)
+                    .Set(s => s.Description, story.Description)
+                    .Set(s => s.Status, story.Status);
 
-                return Request.CreateResponse(HttpStatusCode.Accepted, "Request Accepted");
+                _open.Update(query, update);
+
+                return Request.CreateResponse(HttpStatusCode.Accepted, story);
             }
 
             catch
@@ -81,7 +85,7 @@ namespace KanbanTracker.Controllers
             try
             {
                 _open.Remove(new QueryDocument("_id", new BsonObjectId(new ObjectId(id))));
-                return Request.CreateResponse(HttpStatusCode.Accepted, "Story deleted: " + id);
+                return Request.CreateResponse(HttpStatusCode.NoContent, "Story deleted: " + id);
             }
 
             catch

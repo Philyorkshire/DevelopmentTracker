@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanbanTracker", "KanbanTracker\KanbanTracker.csproj", "{3C2FDD00-6A4B-454E-9CDE-4F561AEA4FA3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanbanTracker.Test", "KanbanTracker.Test\KanbanTracker.Test.csproj", "{6F9E1280-780D-4F96-AF8B-420DB3E96925}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{3C2FDD00-6A4B-454E-9CDE-4F561AEA4FA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C2FDD00-6A4B-454E-9CDE-4F561AEA4FA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C2FDD00-6A4B-454E-9CDE-4F561AEA4FA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F9E1280-780D-4F96-AF8B-420DB3E96925}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F9E1280-780D-4F96-AF8B-420DB3E96925}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F9E1280-780D-4F96-AF8B-420DB3E96925}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F9E1280-780D-4F96-AF8B-420DB3E96925}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
