@@ -2,7 +2,7 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace DevelopmentTracker.Classes
+namespace KanbanTracker.Classes
 {
     public abstract class Task
     {

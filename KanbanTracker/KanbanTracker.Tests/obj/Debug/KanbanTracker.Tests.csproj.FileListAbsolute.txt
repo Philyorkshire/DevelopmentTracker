@@ -1,0 +1,1 @@
+C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker.Tests\obj\Debug\KanbanTracker.Tests.csprojResolveAssemblyReference.cache
