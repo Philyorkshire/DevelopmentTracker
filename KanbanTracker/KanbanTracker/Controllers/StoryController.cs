@@ -40,6 +40,7 @@ namespace KanbanTracker.Controllers
                 Title = story.Title,
                 Description = story.Description,
                 Status = story.Status,
+                Tags = story.Tags,
                 Created = DateTime.Now
             };
 
@@ -65,6 +66,7 @@ namespace KanbanTracker.Controllers
                 var query = Query<Story>.EQ(s => s.Id, (id));
                 var update = Update<Story>
                     .Set(s => s.Title, story.Title)
+                    .Set(s => s.Tags, story.Tags)
                     .Set(s => s.Description, story.Description)
                     .Set(s => s.Status, story.Status);
 

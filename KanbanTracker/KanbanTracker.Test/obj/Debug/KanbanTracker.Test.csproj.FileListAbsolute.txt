@@ -24,3 +24,6 @@ C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker.Test\bin\Debug\System.Web.Http.WebHost.xml
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker.Test\obj\Debug\KanbanTracker.Test.dll
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker.Test\obj\Debug\KanbanTracker.Test.pdb
+C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker.Test\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker.Test\bin\Debug\MongoDB.AspNet.Identity.dll
+C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker.Test\bin\Debug\Microsoft.AspNet.Identity.Core.xml

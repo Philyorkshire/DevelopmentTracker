@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -30,7 +31,8 @@ namespace KanbanTracker.Test.StoryControllerTest
         {
             Title = "Unit Test Story",
             Description = "This is a unit test story description",
-            Status = "TEST-STORY"
+            Status = "TEST-STORY",
+            Tags = new List<string> {"UnitTest"}
         };
 
         public Story GetStory()
@@ -83,7 +85,8 @@ namespace KanbanTracker.Test.StoryControllerTest
             {
                 Title = "PostUpdateStory " + new Random().Next(0,1000),
                 Description = "This is a unit test story description",
-                Status = "TEST-STORY"
+                Status = "TEST-STORY",
+                Tags = new List<string> { "UnitTest" }
             };
 
             var postUpdateResult = Controller.PostStoryUpdate(GetStory().Id, newStory);
