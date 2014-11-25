@@ -18,6 +18,5 @@ namespace KanbanTracker.Classes
         [BsonDateTimeOptions(Representation = BsonType.Document)]
         public DateTime DueDate { get; set; }
 
-        public Team Team { get; set; }
     }
 }

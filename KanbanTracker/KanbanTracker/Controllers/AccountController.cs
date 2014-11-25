@@ -1,17 +1,16 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Mvc;
+using KanbanTracker.Account;
 using KanbanTracker.Classes;
 using KanbanTracker.Models;
 using KanbanTracker.Validation;
-using Microsoft.AspNet.Identity;
-using MongoDB.AspNet.Identity;
 using MongoDB.Driver;
 
 namespace KanbanTracker.Controllers
 {
     public class AccountController : Controller
     {
-        private MongoCollection<IUser> _open;
+        private MongoCollection<User> _open;
 
         public AccountController()
         {
@@ -39,12 +38,11 @@ namespace KanbanTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            var validation = new UserValidation();
-
-            if (ModelState.IsValid && !validation.UserExists(model))
+            if (ModelState.IsValid && !UserValidation.UserExists(model.Email))
             {
-                var user = new IdentityUser(model.Email)
+                var user = new User
                 {
+                    UserName = model.Email,
                     PasswordHash = PasswordHash.CreateHash(model.ConfirmPassword)
                 };
 

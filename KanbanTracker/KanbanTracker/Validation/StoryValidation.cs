@@ -10,18 +10,8 @@ namespace KanbanTracker.Validation
     {
         public string StoryContentsNotEmpty(Story story)
         {
-            var properties = story.GetType().GetProperties();
-            List<string> missingFields = null;
-
-            foreach (var propertyInfo in properties)
-            {
-                if (propertyInfo.GetConstantValue() == "")
-                {
-                    missingFields.Add("item");
-                }
-            }
-
-            return missingFields.ToString();
+            //TODO
+            return null;
         }
     }
 }

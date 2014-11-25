@@ -1,17 +1,19 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using KanbanTracker.Account;
 using Microsoft.AspNet.Identity;
+using MongoDB.AspNet.Identity;
 using MongoDB.Driver;
 
 namespace KanbanTracker.Models
 {
     public static class UserDb
     {
-        public static MongoCollection<IUser> Open()
+        public static MongoCollection<User> Open()
         {
             var client = new MongoClient("mongodb://localhost");
             var server = client.GetServer();
             var db = server.GetDatabase("UserDb");
-            return db.GetCollection<IUser>("Users");
+            return db.GetCollection<User>("Users");
         }
     }
 
