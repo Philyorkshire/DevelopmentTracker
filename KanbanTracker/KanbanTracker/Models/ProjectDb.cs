@@ -3,14 +3,14 @@ using MongoDB.Driver;
 
 namespace KanbanTracker.Models
 {
-    public static class StoryDb
+    public static class ProjectDb
     {
-        public static MongoCollection<Story> Open()
+        public static MongoCollection<Project> Open()
         {
             var client = new MongoClient("mongodb://localhost");
             var server = client.GetServer();
-            var db = server.GetDatabase("StoryDb");
-            return db.GetCollection<Story>("Stories");
+            var db = server.GetDatabase("ProjectDb");
+            return db.GetCollection<Project>("Projects");
         }
     }
 }

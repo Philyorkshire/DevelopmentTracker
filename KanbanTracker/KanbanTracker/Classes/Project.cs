@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
@@ -18,5 +19,6 @@ namespace KanbanTracker.Classes
         [BsonDateTimeOptions(Representation = BsonType.Document)]
         public DateTime DueDate { get; set; }
 
+        public List<Story> Stories { get; set; }
     }
 }

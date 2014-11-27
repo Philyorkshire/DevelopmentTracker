@@ -19,7 +19,7 @@ namespace KanbanTracker.Validation
 
             var count = users.FindAs<User>(Query.EQ("UserName", email)).Count();
 
-            if (count > 1)
+            if (count > 0)
             {
                 return true;
             }
