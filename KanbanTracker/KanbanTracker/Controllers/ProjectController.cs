@@ -20,7 +20,7 @@ namespace KanbanTracker.Controllers
             _open = ProjectDb.Open();
         }
 
-        public IEnumerable<Project> Get()
+        public IEnumerable<Project> GetAllProjects()
         {
             return _open.FindAll();
         }
@@ -32,7 +32,7 @@ namespace KanbanTracker.Controllers
                 : Request.CreateErrorResponse(HttpStatusCode.NotFound, "Story could not be found");
         }
 
-        public HttpResponseMessage PostStory([FromBody]Project project)
+        public HttpResponseMessage PostNewProject([FromBody]Project project)
         {
             var newProject = new Project
             {
@@ -57,7 +57,7 @@ namespace KanbanTracker.Controllers
             }
         }
 
-        public HttpResponseMessage DeleteStory(string id)
+        public HttpResponseMessage DeleteProject(string id)
         {
             try
             {
@@ -71,7 +71,7 @@ namespace KanbanTracker.Controllers
             }
         }
 
-        // stories
+        // Project stories
 
         [Route("project/{id}/stories")]
         public HttpResponseMessage GetAllProjectStories(string id)
@@ -105,7 +105,7 @@ namespace KanbanTracker.Controllers
             try
             {
                 _open.Update(Query.EQ("_id", (ObjectId.Parse(id))),
-                    Update.PushAllWrapped("stories", newStory));
+                    Update.PushAllWrapped("Stories", newStory));
 
                 return Request.CreateResponse(HttpStatusCode.Accepted, newStory);
             }
@@ -129,12 +129,80 @@ namespace KanbanTracker.Controllers
             try
             {
                 _open.Update(query, update);
-                return Request.CreateResponse(HttpStatusCode.OK, "Story deleted: " + storyId);
+                return Request.CreateResponse(HttpStatusCode.Accepted, "Story deleted: " + storyId);
             }
 
             catch
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Story could not be deleted");
+            }
+        }
+
+        // Project bugs
+
+        [Route("project/{projectId}/bugs")]
+        public HttpResponseMessage GetAllProjectBugs(string projectId)
+        {
+            var project = _open.FindOneById(ObjectId.Parse(projectId));
+            return project != null ? Request.CreateResponse(HttpStatusCode.OK, project.Bugs)
+                : Request.CreateErrorResponse(HttpStatusCode.NotFound, "Bugs could not be found");
+        }
+
+        [Route("project/{projectId}/bugs/{bugId}")]
+        public HttpResponseMessage GetAProjectBug(string projectId, string bugId)
+        {
+            var project = _open.FindOneById(ObjectId.Parse(projectId));
+            var bugs = project.Bugs.Find(b => b.Id == bugId);
+
+            return bugs != null ? Request.CreateResponse(HttpStatusCode.OK, bugs)
+                : Request.CreateErrorResponse(HttpStatusCode.NotFound, "Bug could not be found");
+        }
+
+        [Route("project/{projectId}/bugs/{bugId}")]
+        public HttpResponseMessage DeleteAProjectBug(string projectId, string bugId)
+        {
+            var query = Query.And(Query.EQ("_id", ObjectId.Parse(projectId)));
+
+            var update = Update.Pull("Bugs", new BsonDocument{
+                             { "_id", ObjectId.Parse(bugId) }
+                });
+
+            try
+            {
+                _open.Update(query, update);
+                return Request.CreateResponse(HttpStatusCode.Accepted, "Story deleted: " + bugId);
+            }
+
+            catch
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Story could not be deleted");
+            }
+        }
+
+        [Route("project/{projectId}/bugs")]
+        public HttpResponseMessage PostANewProjectBug(string projectId, [FromBody]Bug bug)
+        {
+            var newBug = new Bug
+            {
+                Id = ObjectId.GenerateNewId().ToString(),
+                Title = bug.Title,
+                Description = bug.Description,
+                Status = "In Progress",
+                Created = DateTime.Now
+            };
+
+            try
+            {
+                _open.Update(Query.EQ("_id", (ObjectId.Parse(projectId))),
+                    Update.PushAllWrapped("Bugs", newBug));
+
+                return Request.CreateResponse(HttpStatusCode.Accepted, newBug);
+            }
+
+            catch
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest,
+                    "Request not accepted, please check documentation");
             }
         }
     }

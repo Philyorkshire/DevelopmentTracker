@@ -48,10 +48,49 @@ namespace KanbanTracker.Test
                             Tags = new List<string>
                             {
                                 "unitTests"
-                            }
+                            },
 
+                            Comments = new List<Comment>
+                            {
+                                new Comment
+                                {
+                                    Id = ObjectId.GenerateNewId().ToString(),
+                                    Description = "This is a new comment - seeded",
+                                    Created = DateTime.Now,
+                                    OwnerId = "123456789"
+                                }
+                            }
+                        }
+                    },
+
+                    Bugs = new List<Bug>
+                    {
+                        new Bug
+                        {
+                            Id = ObjectId.GenerateNewId().ToString(),
+                            Title = "Unit Testing",
+                            Description = "Seeded data",
+                            Created = DateTime.Now,
+                            Status = "In-progress",
+                            Tags = new List<string>
+                            {
+                                "unitTests"
+                            },
+
+                            Comments = new List<Comment>
+                            {
+                                new Comment
+                                {
+                                    Id = ObjectId.GenerateNewId().ToString(),
+                                    Description = "This is a new comment - seeded",
+                                    Created = DateTime.Now,
+                                    OwnerId = "123456789"
+                                }
+                            }
                         }
                     }
+
+                    
                 },
 
                 new Project
@@ -73,8 +112,46 @@ namespace KanbanTracker.Test
                             Tags = new List<string>
                             {
                                 "unitTests"
+                            },
+
+                            Comments = new List<Comment>
+                            {
+                                new Comment
+                                {
+                                    Id = ObjectId.GenerateNewId().ToString(),
+                                    Description = "This is a new comment - seeded",
+                                    Created = DateTime.Now,
+                                    OwnerId = "123456789"
+                                }
                             }
 
+                        }
+                    },
+
+                    Bugs = new List<Bug>
+                    {
+                        new Bug
+                        {
+                            Id = ObjectId.GenerateNewId().ToString(),
+                            Title = "Unit Testing",
+                            Description = "Seeded data",
+                            Created = DateTime.Now,
+                            Status = "In-progress",
+                            Tags = new List<string>
+                            {
+                                "unitTests"
+                            },
+
+                            Comments = new List<Comment>
+                            {
+                                new Comment
+                                {
+                                    Id = ObjectId.GenerateNewId().ToString(),
+                                    Description = "This is a new comment - seeded",
+                                    Created = DateTime.Now,
+                                    OwnerId = "123456789"
+                                }
+                            }
                         }
                     }
                 },
@@ -98,8 +175,46 @@ namespace KanbanTracker.Test
                             Tags = new List<string>
                             {
                                 "unitTests"
+                            },
+
+                            Comments = new List<Comment>
+                            {
+                                new Comment
+                                {
+                                    Id = ObjectId.GenerateNewId().ToString(),
+                                    Description = "This is a new comment - seeded",
+                                    Created = DateTime.Now,
+                                    OwnerId = "123456789"
+                                }
                             }
 
+                        }
+                    },
+
+                    Bugs = new List<Bug>
+                    {
+                        new Bug
+                        {
+                            Id = ObjectId.GenerateNewId().ToString(),
+                            Title = "Unit Testing",
+                            Description = "Seeded data",
+                            Created = DateTime.Now,
+                            Status = "In-progress",
+                            Tags = new List<string>
+                            {
+                                "unitTests"
+                            },
+
+                            Comments = new List<Comment>
+                            {
+                                new Comment
+                                {
+                                    Id = ObjectId.GenerateNewId().ToString(),
+                                    Description = "This is a new comment - seeded",
+                                    Created = DateTime.Now,
+                                    OwnerId = "123456789"
+                                }
+                            }
                         }
                     }
                 }

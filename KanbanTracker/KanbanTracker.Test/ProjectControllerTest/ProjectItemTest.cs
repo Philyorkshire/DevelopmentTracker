@@ -11,7 +11,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
-namespace KanbanTracker.Test.ProjectTest
+namespace KanbanTracker.Test.ProjectControllerTest
 {
     [TestClass]
     public class ProjectItemTest
@@ -31,7 +31,7 @@ namespace KanbanTracker.Test.ProjectTest
         {
             var projects = _open.FindAll();
 
-            var result = controller.Get();
+            var result = controller.GetAllProjects();
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(projects, typeof (IEnumerable<Project>));

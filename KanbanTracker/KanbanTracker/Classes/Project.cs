@@ -4,6 +4,7 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace KanbanTracker.Classes
+
 {
     public class Project
     {
@@ -20,5 +21,6 @@ namespace KanbanTracker.Classes
         public DateTime DueDate { get; set; }
 
         public List<Story> Stories { get; set; }
-    }
+        public List<Bug> Bugs { get; set; }
+    } 
 }

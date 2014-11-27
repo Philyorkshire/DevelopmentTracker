@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Mvc;
-using KanbanTracker.Account;
+using KanbanTracker.Classes;
 using KanbanTracker.Classes;
 using KanbanTracker.Models;
 using KanbanTracker.Validation;

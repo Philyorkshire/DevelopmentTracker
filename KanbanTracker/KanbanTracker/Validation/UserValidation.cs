@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Security.Cryptography;
 using System.Text;
-using KanbanTracker.Account;
+using KanbanTracker.Classes;
 using KanbanTracker.Models;
 using Microsoft.AspNet.Identity;
 using MongoDB.AspNet.Identity;

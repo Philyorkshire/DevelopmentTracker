@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using MongoDB.AspNet.Identity;
+﻿using MongoDB.AspNet.Identity;
 
-namespace KanbanTracker.Account
+namespace KanbanTracker.Classes
 {
     public class User : IdentityUser
     {

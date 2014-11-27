@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using KanbanTracker.Account;
+using KanbanTracker.Classes;
 using Microsoft.AspNet.Identity;
 using MongoDB.AspNet.Identity;
 using MongoDB.Driver;
