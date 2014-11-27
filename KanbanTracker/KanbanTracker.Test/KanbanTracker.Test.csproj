@@ -64,8 +64,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ProjectTest\ProjectItemTest.cs" />
+    <Compile Include="Project\ProjectItemTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SeedData.cs" />
     <Compile Include="ValidationTest\ValidationTest.cs" />
   </ItemGroup>
   <ItemGroup>
