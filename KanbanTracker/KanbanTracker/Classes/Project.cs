@@ -8,6 +8,8 @@ namespace KanbanTracker.Classes
 {
     public class Project
     {
+        public string Uri { get; set; }
+
         [BsonElement("_id")]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }

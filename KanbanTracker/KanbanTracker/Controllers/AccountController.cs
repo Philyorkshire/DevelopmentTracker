@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Mvc;
 using KanbanTracker.Classes;
-using KanbanTracker.Classes;
 using KanbanTracker.Models;
 using KanbanTracker.Validation;
 using MongoDB.Driver;

@@ -3,10 +3,8 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using KanbanTracker.Classes;
-using KanbanTracker.Classes;
 using KanbanTracker.Models;
 using KanbanTracker.Validation;
-using MongoDB.AspNet.Identity;
 using MongoDB.Bson;
 using MongoDB.Driver;
 

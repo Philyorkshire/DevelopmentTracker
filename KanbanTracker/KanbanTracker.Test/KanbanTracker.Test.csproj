@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ProjectControllerTest\ProjectBugsTest.cs" />
+    <Compile Include="ProjectControllerTest\ProjectItemCommentsTest.cs" />
     <Compile Include="ProjectControllerTest\ProjectItemTest.cs" />
     <Compile Include="ProjectControllerTest\ProjectStoriesTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

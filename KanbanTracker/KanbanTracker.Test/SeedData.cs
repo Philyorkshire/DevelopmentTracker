@@ -12,6 +12,14 @@ namespace KanbanTracker.Test
     public class SeedData
     {
         private readonly MongoCollection<Project> _open;
+        private string id { get; set; }
+
+        public string GenerateId()
+        {
+            var ID = ObjectId.GenerateNewId().ToString();
+            id = ID;
+            return ID;
+        }
 
         public SeedData()
         {
@@ -31,7 +39,8 @@ namespace KanbanTracker.Test
             {
                 new Project
                 {
-                    Id = ObjectId.GenerateNewId().ToString(),
+                    Id = GenerateId(),
+                    Uri = "http://localhost:62168/project/" + id,
                     Title = "Unit Testing 1",
                     Description = "Seeded data",
                     Created = DateTime.Now,
@@ -95,7 +104,8 @@ namespace KanbanTracker.Test
 
                 new Project
                 {
-                    Id = ObjectId.GenerateNewId().ToString(),
+                    Id = GenerateId(),
+                    Uri = "http://localhost:62168/project/" + id,
                     Title = "Unit Testing 2",
                     Description = "Seeded data",
                     Created = DateTime.Now,
@@ -158,7 +168,8 @@ namespace KanbanTracker.Test
 
                 new Project
                 {
-                    Id = ObjectId.GenerateNewId().ToString(),
+                    Id = GenerateId(),
+                    Uri = "http://localhost:62168/project/" + id,
                     Title = "Unit Testing 3",
                     Description = "Seeded data",
                     Created = DateTime.Now,
@@ -218,8 +229,6 @@ namespace KanbanTracker.Test
                         }
                     }
                 }
-
-
             };
 
             _open.InsertBatch(projects);

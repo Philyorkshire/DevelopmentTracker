@@ -1,19 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.UI;
 using KanbanTracker.Classes;
 using KanbanTracker.Models;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
+using MongoDB.Driver.Linq;
 
 namespace KanbanTracker.Controllers
 {
     public class ProjectController : ApiController
     {
-        private MongoCollection<Project> _open;
+        private readonly MongoCollection<Project> _open;
 
         public ProjectController()
         {
@@ -204,6 +207,148 @@ namespace KanbanTracker.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest,
                     "Request not accepted, please check documentation");
             }
+        }
+
+        // Project element comments
+
+        [Route("project/{projectId}/{task}/{elementId}/comments")]
+        public HttpResponseMessage GetAllProjectElementComments(string projectId, string task, string elementId)
+        {
+            var project = _open.FindOneById(ObjectId.Parse(projectId));
+
+            if (task == "bugs")
+            {
+                var bug = project.Bugs.Find(b => b.Id == elementId);
+                var comments = bug.Comments;
+
+                return comments != null ? Request.CreateResponse(HttpStatusCode.OK, comments)
+                    : Request.CreateErrorResponse(HttpStatusCode.NotFound, "Comment could not be found");
+            }
+            
+            if (task == "stories")
+            {
+                var story = project.Stories.Find(s => s.Id == elementId);
+                var comments = story.Comments;
+
+                return comments != null
+                    ? Request.CreateResponse(HttpStatusCode.OK, comments)
+                    : Request.CreateErrorResponse(HttpStatusCode.NotFound, "Comment could not be found");
+            }
+
+            return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Incorrect URI request");
+
+        }
+
+        [Route("project/{projectId}/{task}/{elementId}/comments/{commentId}")]
+        public HttpResponseMessage GetAProjectElementComment(string projectId, string task, string elementId, string commentId)
+        {
+            var project = _open.FindOneById(ObjectId.Parse(projectId));
+
+            if (task == "bugs")
+            {
+                var bug = project.Bugs.Find(b => b.Id == elementId);
+                var comment = bug.Comments.Find(c => c.Id == commentId);
+
+                return comment != null ? Request.CreateResponse(HttpStatusCode.OK, comment)
+                    : Request.CreateErrorResponse(HttpStatusCode.NotFound, "Comment could not be found");
+            }
+
+            if (task == "stories")
+            {
+                var story = project.Stories.Find(s => s.Id == elementId);
+                var comment = story.Comments.Find(c => c.Id == commentId);
+
+                return comment != null ? Request.CreateResponse(HttpStatusCode.OK, comment)
+                    : Request.CreateErrorResponse(HttpStatusCode.NotFound, "Comment could not be found");
+            }
+
+            return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Incorrect URI request");
+        }
+
+        [Route("project/{projectId}/{task}/{elementId}/comments")]
+        public HttpResponseMessage PostAProjectElementComment(string projectId, string task, string elementId, [FromBody] Comment comment)
+        {
+            var project = _open.FindOneById(ObjectId.Parse(projectId));
+
+            var nComment = new Comment
+            {
+                Id = ObjectId.GenerateNewId().ToString(),
+                Created = DateTime.Now,
+                Description = comment.Description,
+                OwnerId = "1234567890",
+                Uri = comment.Uri
+            };
+
+            if (task == "bugs")
+            {
+                var bug = project.Bugs.Find(b => b.Id == elementId);
+                var comments = bug.Comments;
+
+                comments.Add(nComment);
+                _open.Save(project);
+
+                return comments != null ? Request.CreateResponse(HttpStatusCode.Accepted, comments)
+                    : Request.CreateErrorResponse(HttpStatusCode.NotFound, "Comment could not be created");
+            }
+
+            if (task == "stories")
+            {
+                var story = project.Stories.Find(s => s.Id == elementId);
+                var comments = story.Comments;
+
+                comments.Add(nComment);
+                _open.Save(project);
+
+                return comments != null
+                    ? Request.CreateResponse(HttpStatusCode.Accepted, comments)
+                    : Request.CreateErrorResponse(HttpStatusCode.NotFound, "Comment could not be created");
+            }
+
+            return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Incorrect URI request");
+        }
+
+        [Route("project/{projectId}/{task}/{elementId}/comments/{commentId}")]
+        public HttpResponseMessage DeleteAProjectElementComments(string projectId, string task, string elementId, string commentId)
+        {
+            var query = Query.And(Query.EQ("_id", ObjectId.Parse(projectId)));
+
+            if (task == "bugs")
+            {
+                var update = Update.Pull("Bug.Comment", new BsonDocument{
+                             { "_id", ObjectId.Parse(commentId) }
+                });
+
+                try
+                {
+                    _open.Update(query, update);
+                    return Request.CreateResponse(HttpStatusCode.Accepted, "Comment deleted: " + commentId);
+                }
+
+                catch
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Comment could not be deleted");
+                }
+            }
+
+            if (task == "stories")
+            {
+                var update = Update.Pull("Story.Comment", new BsonDocument{
+                             { "_id", ObjectId.Parse(commentId) }
+                });
+
+                try
+                {
+                    _open.Update(query, update);
+                    return Request.CreateResponse(HttpStatusCode.Accepted, "Comment deleted: " + commentId);
+                }
+
+                catch
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Comment could not be deleted");
+                }
+            }
+
+            return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Incorrect URI request");
         }
     }
 }

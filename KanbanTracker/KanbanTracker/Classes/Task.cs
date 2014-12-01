@@ -7,6 +7,8 @@ namespace KanbanTracker.Classes
 {
     public abstract class Task
     {
+        public string Uri { get; set; }
+
         [BsonElement("_id")]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
