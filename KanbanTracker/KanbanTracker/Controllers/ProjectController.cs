@@ -76,7 +76,7 @@ namespace KanbanTracker.Controllers
 
         // Project stories
 
-        [Route("project/{id}/stories")]
+        [Route("api/project/{id}/stories")]
         public HttpResponseMessage GetAllProjectStories(string id)
         {
             var project = _open.FindOneById(ObjectId.Parse(id));
@@ -84,7 +84,7 @@ namespace KanbanTracker.Controllers
                 : Request.CreateErrorResponse(HttpStatusCode.NotFound, "Story could not be found");
         }
 
-        [Route("project/{projectId}/stories/{storyId}")]
+        [Route("api/project/{projectId}/stories/{storyId}")]
         public HttpResponseMessage GetAProjectStory(string projectId, string storyId)
         {
             var project = _open.FindOneById(ObjectId.Parse(projectId));
@@ -94,7 +94,7 @@ namespace KanbanTracker.Controllers
                 : Request.CreateErrorResponse(HttpStatusCode.NotFound, "Story could not be found");
         }
 
-        [Route("project/{id}/stories")]
+        [Route("api/project/{id}/stories")]
         public HttpResponseMessage PostProjectStory(string id, [FromBody]Story story)
         {
             var newStory = new Story
@@ -120,7 +120,7 @@ namespace KanbanTracker.Controllers
             }
         }
 
-        [Route("project/{projectId}/stories/{storyId}")]
+        [Route("api/project/{projectId}/stories/{storyId}")]
         public HttpResponseMessage DeleteAProjectStory(string projectId, string storyId)
         {
             var query = Query.And(Query.EQ("_id", ObjectId.Parse(projectId)));
@@ -143,7 +143,7 @@ namespace KanbanTracker.Controllers
 
         // Project bugs
 
-        [Route("project/{projectId}/bugs")]
+        [Route("api/project/{projectId}/bugs")]
         public HttpResponseMessage GetAllProjectBugs(string projectId)
         {
             var project = _open.FindOneById(ObjectId.Parse(projectId));
@@ -151,7 +151,7 @@ namespace KanbanTracker.Controllers
                 : Request.CreateErrorResponse(HttpStatusCode.NotFound, "Bugs could not be found");
         }
 
-        [Route("project/{projectId}/bugs/{bugId}")]
+        [Route("api/project/{projectId}/bugs/{bugId}")]
         public HttpResponseMessage GetAProjectBug(string projectId, string bugId)
         {
             var project = _open.FindOneById(ObjectId.Parse(projectId));
@@ -161,7 +161,7 @@ namespace KanbanTracker.Controllers
                 : Request.CreateErrorResponse(HttpStatusCode.NotFound, "Bug could not be found");
         }
 
-        [Route("project/{projectId}/bugs/{bugId}")]
+        [Route("api/project/{projectId}/bugs/{bugId}")]
         public HttpResponseMessage DeleteAProjectBug(string projectId, string bugId)
         {
             var query = Query.And(Query.EQ("_id", ObjectId.Parse(projectId)));
@@ -182,7 +182,7 @@ namespace KanbanTracker.Controllers
             }
         }
 
-        [Route("project/{projectId}/bugs")]
+        [Route("api/project/{projectId}/bugs")]
         public HttpResponseMessage PostANewProjectBug(string projectId, [FromBody]Bug bug)
         {
             var newBug = new Bug
@@ -211,7 +211,7 @@ namespace KanbanTracker.Controllers
 
         // Project element comments
 
-        [Route("project/{projectId}/{task}/{elementId}/comments")]
+        [Route("api/project/{projectId}/{task}/{elementId}/comments")]
         public HttpResponseMessage GetAllProjectElementComments(string projectId, string task, string elementId)
         {
             var project = _open.FindOneById(ObjectId.Parse(projectId));
@@ -236,10 +236,9 @@ namespace KanbanTracker.Controllers
             }
 
             return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Incorrect URI request");
-
         }
 
-        [Route("project/{projectId}/{task}/{elementId}/comments/{commentId}")]
+        [Route("api/project/{projectId}/{task}/{elementId}/comments/{commentId}")]
         public HttpResponseMessage GetAProjectElementComment(string projectId, string task, string elementId, string commentId)
         {
             var project = _open.FindOneById(ObjectId.Parse(projectId));
@@ -265,7 +264,7 @@ namespace KanbanTracker.Controllers
             return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Incorrect URI request");
         }
 
-        [Route("project/{projectId}/{task}/{elementId}/comments")]
+        [Route("api/project/{projectId}/{task}/{elementId}/comments")]
         public HttpResponseMessage PostAProjectElementComment(string projectId, string task, string elementId, [FromBody] Comment comment)
         {
             var project = _open.FindOneById(ObjectId.Parse(projectId));
@@ -307,7 +306,7 @@ namespace KanbanTracker.Controllers
             return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Incorrect URI request");
         }
 
-        [Route("project/{projectId}/{task}/{elementId}/comments/{commentId}")]
+        [Route("api/project/{projectId}/{task}/{elementId}/comments/{commentId}")]
         public HttpResponseMessage DeleteAProjectElementComments(string projectId, string task, string elementId, string commentId)
         {
             var query = Query.And(Query.EQ("_id", ObjectId.Parse(projectId)));

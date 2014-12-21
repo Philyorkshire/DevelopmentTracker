@@ -9,7 +9,7 @@ namespace KanbanTracker.Controllers
 {
     public class AccountController : Controller
     {
-        private MongoCollection<User> _open;
+        private readonly MongoCollection<User> _open;
 
         public AccountController()
         {

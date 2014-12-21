@@ -40,7 +40,7 @@ namespace KanbanTracker.Test
                 new Project
                 {
                     Id = GenerateId(),
-                    Uri = "http://localhost:62168/project/" + id,
+                    Uri = "http://localhost:62168/api/project/" + id,
                     Title = "Unit Testing 1",
                     Description = "Seeded data",
                     Created = DateTime.Now,
@@ -105,7 +105,7 @@ namespace KanbanTracker.Test
                 new Project
                 {
                     Id = GenerateId(),
-                    Uri = "http://localhost:62168/project/" + id,
+                    Uri = "http://localhost:62168/api/project/" + id,
                     Title = "Unit Testing 2",
                     Description = "Seeded data",
                     Created = DateTime.Now,
@@ -169,7 +169,7 @@ namespace KanbanTracker.Test
                 new Project
                 {
                     Id = GenerateId(),
-                    Uri = "http://localhost:62168/project/" + id,
+                    Uri = "http://localhost:62168/api/project/" + id,
                     Title = "Unit Testing 3",
                     Description = "Seeded data",
                     Created = DateTime.Now,

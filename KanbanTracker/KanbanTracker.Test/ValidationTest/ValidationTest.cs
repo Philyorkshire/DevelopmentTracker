@@ -13,11 +13,6 @@ namespace KanbanTracker.Test.ValidationTest
         public StoryValidation Validation;
 
         [TestMethod]
-        public void CheckFieldsNotEmpty()
-        {
-        }
-
-        [TestMethod]
         public void CheckPasswordHash()
         {
             var hashPassword = PasswordHash.CreateHash(TestPassword);
