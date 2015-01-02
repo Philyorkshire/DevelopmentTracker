@@ -24,5 +24,10 @@ namespace KanbanTracker.Controllers
         {
             return View();
         }
+
+        public ActionResult Wiki()
+        {
+            return View();
+        }
     }
 }

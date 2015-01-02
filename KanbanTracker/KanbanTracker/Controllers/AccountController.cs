@@ -14,9 +14,13 @@ EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED
 WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
 \***************************************************************************/
 
+using System;
+using System.Runtime.Remoting.Contexts;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
-using KanbanTracker.Classes;
+
+using KanbanTracker.Account;
 using KanbanTracker.Models;
 using MongoDB.Driver;
 
@@ -31,14 +35,48 @@ namespace KanbanTracker.Controllers
             _open = UserDb.Open();
         }
 
+        [Auth]
         public ActionResult Index()
         {
             return View();
         }
 
+        [AllowAnonymous]
         public ActionResult Login()
         {
             return View();
+        }
+
+        public ActionResult Logout()
+        {
+            var httpCookie = HttpContext.Request.Cookies["sid"];
+            if (httpCookie != null && httpCookie.Value != string.Empty)
+            {
+                Validation.UserValidation.DestroySession(httpCookie.Value);
+                httpCookie.Expires = DateTime.Now.AddDays(-1d);
+            }
+
+            @ViewBag.Info = "Logged out successfully";
+            return View("Login");
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ViewResult Login(LoginViewModel model)
+        {
+            if (ModelState.IsValid && Validation.UserValidation.Login(model))
+            {
+                Response.SetCookie(new HttpCookie("sid", Validation.UserValidation.GetSession(model)));
+                Response.Cookies["sid"].Expires = DateTime.Now.AddMinutes(30);
+
+                @ViewBag.Info = (string.Format("Welcome, {0}", model.Email));
+                return View("Index");
+            }
+
+            // If we got this far, something failed, redisplay form
+            @ViewBag.Info = "Login Failed";
+            return View(model);
         }
 
         [AllowAnonymous]
@@ -52,7 +90,7 @@ namespace KanbanTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            if (ModelState.IsValid && !KanbanTracker.Validation.UserValidation.UserExists(model.Email))
+            if (ModelState.IsValid && !Validation.UserValidation.UserExists(model.Email))
             {
                 var user = new User
                 {
@@ -68,8 +106,4 @@ namespace KanbanTracker.Controllers
             return View(model);
         }
     }
-
-
-
-
 }

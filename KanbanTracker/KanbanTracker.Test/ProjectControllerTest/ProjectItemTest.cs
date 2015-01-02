@@ -20,7 +20,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using KanbanTracker.Classes;
+using KanbanTracker.Account;
 using KanbanTracker.Controllers;
 using KanbanTracker.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

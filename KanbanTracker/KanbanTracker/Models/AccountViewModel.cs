@@ -15,11 +15,14 @@ WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
 \***************************************************************************/
 
 using System.ComponentModel.DataAnnotations;
-using KanbanTracker.Classes;
+using KanbanTracker.Account;
 using MongoDB.Driver;
 
 namespace KanbanTracker.Models
 {
+    /// <summary>
+    /// Change the MongoClient location depending on the install of MongoDb - default used here.
+    /// </summary>
     public static class UserDb
     {
         public static MongoCollection<User> Open()
@@ -48,5 +51,18 @@ namespace KanbanTracker.Models
         [Display(Name = "Confirm password")]
         [System.Web.Mvc.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+    }
+
+    public class LoginViewModel
+    {
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
     }
 }

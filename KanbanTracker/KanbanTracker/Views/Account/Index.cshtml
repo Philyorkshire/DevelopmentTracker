@@ -1,11 +1,5 @@
-﻿@Model KanbanTracker.Model
-
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-
+﻿@using KanbanTracker.Account
+@using KanbanTracker.Validation
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -13,7 +7,8 @@
 </head>
 <body>
     <div>
-        <p> Hello </p>
+        <p> You've registered! </p>
+        <p>@Auth.SessionId</p>
     </div>
 </body>
 </html>

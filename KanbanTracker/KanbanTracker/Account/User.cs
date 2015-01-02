@@ -15,10 +15,14 @@ WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
 \***************************************************************************/
 
 using MongoDB.AspNet.Identity;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace KanbanTracker.Classes
+namespace KanbanTracker.Account
 {
     public class User : IdentityUser
     {
+        [BsonRepresentation(BsonType.ObjectId)]
+        public virtual string SessionId { get; set; }
     }
 }

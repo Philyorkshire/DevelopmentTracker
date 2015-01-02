@@ -18,7 +18,7 @@ using System;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace KanbanTracker.Classes
+namespace KanbanTracker.Account
 {
     public class Comment
     {

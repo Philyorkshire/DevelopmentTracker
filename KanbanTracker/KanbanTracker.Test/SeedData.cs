@@ -16,8 +16,8 @@ WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
 
 using System;
 using System.Collections.Generic;
-using KanbanTracker.Classes;
-using KanbanTracker.Classes;
+using KanbanTracker.Account;
+using KanbanTracker.Account;
 using KanbanTracker.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MongoDB.Bson;

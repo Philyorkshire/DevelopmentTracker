@@ -18,7 +18,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using KanbanTracker.Classes;
+using KanbanTracker.Account;
 using KanbanTracker.Models;
 using KanbanTracker.Validation;
 using MongoDB.Bson;

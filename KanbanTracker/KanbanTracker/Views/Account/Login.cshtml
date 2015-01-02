@@ -1,18 +1,50 @@
-﻿
+﻿@model KanbanTracker.Models.LoginViewModel
 
-@{
-    Layout = null;
-}
+<header>
+    <div class="content-wrapper">
+        <div class="float-left">
+            <p class="site-title">
+                <a href="~/">Development Tracker</a>
+            </p>
+        </div>
+    </div>
+</header>
+<div id="body">
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>Login</h1>
+            </hgroup>
+            <p>
+                Default page
+           
+            </p>
+            @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+ @Html.AntiForgeryToken()
 
-<!DOCTYPE html>
+ @Html.ValidationSummary("", new { @class = "text-danger" })
 
-<html>
-    <head runat="server" ID="Head">
-        <title></title>
-        <style type="text/css">.details { }</style>
-    </head>
-    <body>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    </div>
+                </div>
 
-       
-    </body>
-</html>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" class="btn btn-default" value="Login" />
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+</div>

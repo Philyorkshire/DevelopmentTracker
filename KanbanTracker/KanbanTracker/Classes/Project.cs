@@ -19,7 +19,7 @@ using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace KanbanTracker.Classes
+namespace KanbanTracker.Account
 
 {
     public class Project
