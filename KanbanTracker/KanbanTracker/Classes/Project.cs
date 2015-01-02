@@ -19,7 +19,7 @@ using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace KanbanTracker.Account
+namespace KanbanTracker.Classes
 
 {
     public class Project
@@ -31,6 +31,9 @@ namespace KanbanTracker.Account
         public string Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Owner { get; set; }
 
         [BsonDateTimeOptions(Representation = BsonType.Document)]
         public DateTime Created { get; set; }

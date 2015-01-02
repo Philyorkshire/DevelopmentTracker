@@ -20,11 +20,13 @@ using System.Web.Routing;
 using KanbanTracker.Validation;
 using MongoDB.Bson;
 
-namespace KanbanTracker.Account
+namespace KanbanTracker.Classes
 {
     public class Auth : ActionFilterAttribute
     {
         public static string SessionId = null;
+        public static bool Authenticated = false;
+        public static string Message = null;
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
@@ -34,7 +36,6 @@ namespace KanbanTracker.Account
             {
                 var datetimeSid = (ObjectId.Parse(httpCookie.Value).CreationTime);
                 var duration = DateTime.Now - datetimeSid;
-                System.Diagnostics.Debug.WriteLine(duration.Minutes);
 
                 if (duration.Minutes > 1 || !UserValidation.CheckSession(ObjectId.Parse(httpCookie.Value)))
                 {
@@ -46,11 +47,15 @@ namespace KanbanTracker.Account
                         });
 
                     SessionId = null;
+                    Message = "Session expired, please login";
+                    Authenticated = false;
                 }
 
                 else
                 {
                     SessionId = httpCookie.Value;
+                    Message = null;
+                    Authenticated = true;
                 }
             }
 

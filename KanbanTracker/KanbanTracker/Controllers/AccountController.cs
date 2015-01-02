@@ -15,12 +15,11 @@ WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
 \***************************************************************************/
 
 using System;
-using System.Runtime.Remoting.Contexts;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
-using KanbanTracker.Account;
+using KanbanTracker.Classes;
 using KanbanTracker.Models;
 using MongoDB.Driver;
 
@@ -54,6 +53,7 @@ namespace KanbanTracker.Controllers
             {
                 Validation.UserValidation.DestroySession(httpCookie.Value);
                 httpCookie.Expires = DateTime.Now.AddDays(-1d);
+                Auth.Authenticated = false;
             }
 
             @ViewBag.Info = "Logged out successfully";
@@ -63,7 +63,7 @@ namespace KanbanTracker.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ViewResult Login(LoginViewModel model)
+        public RedirectToRouteResult Login(LoginViewModel model)
         {
             if (ModelState.IsValid && Validation.UserValidation.Login(model))
             {
@@ -71,12 +71,12 @@ namespace KanbanTracker.Controllers
                 Response.Cookies["sid"].Expires = DateTime.Now.AddMinutes(30);
 
                 @ViewBag.Info = (string.Format("Welcome, {0}", model.Email));
-                return View("Index");
+                return RedirectToAction("dashboard", "projects");
             }
 
             // If we got this far, something failed, redisplay form
             @ViewBag.Info = "Login Failed";
-            return View(model);
+            return RedirectToAction("login");
         }
 
         [AllowAnonymous]

@@ -16,11 +16,11 @@ WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
 
 using System;
 using System.Collections.Generic;
-using KanbanTracker.Account;
+using KanbanTracker.Classes;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace KanbanTracker.Account 
+namespace KanbanTracker.Classes 
 {
     public abstract class Task
     {

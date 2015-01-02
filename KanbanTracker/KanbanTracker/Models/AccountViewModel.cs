@@ -14,8 +14,9 @@ EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED
 WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
 \***************************************************************************/
 
+using System;
 using System.ComponentModel.DataAnnotations;
-using KanbanTracker.Account;
+using KanbanTracker.Classes;
 using MongoDB.Driver;
 
 namespace KanbanTracker.Models
@@ -64,5 +65,21 @@ namespace KanbanTracker.Models
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
+    }
+
+    public class ProjectViewModel 
+    {
+        [Required]
+        [Display(Name = "Title")]
+        public string Title { get; set; }
+
+        [Required]
+        [Display(Name = "Description")]
+        public string Description { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
+        [Display(Name = "Due")]
+        public DateTime DueDate { get; set; }
     }
 }

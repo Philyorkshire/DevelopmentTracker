@@ -17,7 +17,7 @@ WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
 using System;
 using System.Security.Cryptography;
 
-namespace KanbanTracker.Account
+namespace KanbanTracker.Classes
 {
     /// <summary> Create password hashes and method to verify passwords supplied by user. </summary>   
     public class PasswordHash

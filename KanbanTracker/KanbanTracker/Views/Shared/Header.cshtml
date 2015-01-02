@@ -1,0 +1,38 @@
+﻿@using KanbanTracker.Classes
+<header>
+    <div class="content-wrapper">
+        <div class="float-left">
+            <p class="site-title">
+                <a href="~/">Development Tracker</a></p>
+        </div>
+        @{
+            if (Auth.Authenticated)
+            {
+                <form class="createproject" action="../projects/create">
+                    <input type="submit" value="Create Project">
+                </form>
+            
+                <select id="projects">
+                    <option>Option</option>
+                </select>
+            
+                <div class="nav">
+                    <a href="@Url.Action("dashboard", "projects")">Dashboard</a>
+                    <a href="@Url.Action("index", "account")">Account</a>
+                    <a href="@Url.Action("logout", "account")">Logout</a>
+                </div>
+            }
+
+            else
+            {
+                <div class="nav">
+                    <a href="@Url.Action("dashboard", "projects")">Dashboard</a>
+                    <a href="@Url.Action("index", "account")">Account</a>
+                    <a href="@Url.Action("login", "account")">Login</a>
+                    <a href="@Url.Action("register", "account")">Register</a>
+                    <a href="@Url.Action("wiki", "home")">Wiki</a>
+                </div>
+            }
+        }
+    </div>
+</header>

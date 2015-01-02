@@ -2,11 +2,10 @@
     background-color: #e2e2e2;
     margin: 0;
     padding: 0;
+    margin-bottom: -15px;
 }
 
 body {
-    background-color: #fff;
-    border-top: solid 10px #000;
     color: #333;
     font-size: .85em;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
@@ -20,6 +19,53 @@ a {
     padding-left: 3px;
     padding-right: 3px;
     text-decoration: underline;
+}
+
+.content {
+    margin-left: 15px;
+}
+
+.content h4 {
+    border-bottom: 2px solid rgb(226, 226, 226);
+    padding-bottom: 15px;
+}
+
+.cards {
+    background-color: white;
+    margin: 5px;
+}
+
+.card {
+    float: left;
+    background-color: white;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.createproject {
+    display: inline-block;
+    float: left;
+}
+
+.sections {
+    display: inline-block;
+    background-color: #7ac0da;
+    width: 14%;
+    text-align: center;
+    padding-bottom: 15px;
+    float: left;
+    margin: 1px;
+    min-height: 600px;
+}
+
+header {
+    background-color: rgb(123, 123, 123);
+    height: 45px;
+    padding: 10px;
+}
+
+.nav {
+    float: right;
 }
 
     a:link, a:visited,

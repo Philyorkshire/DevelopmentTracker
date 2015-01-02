@@ -18,7 +18,7 @@ using MongoDB.AspNet.Identity;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace KanbanTracker.Account
+namespace KanbanTracker.Classes
 {
     public class User : IdentityUser
     {
