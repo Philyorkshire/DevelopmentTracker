@@ -70,7 +70,8 @@ namespace KanbanTracker.Test
                             Title = "Unit Testing",
                             Description = "Seeded data",
                             Created = DateTime.Now,
-                            Status = "In-progress",
+                            Status = "backlog",
+                            Assigned = "marsden@phillip.com",
                             Tags = new List<string>
                             {
                                 "unitTests"
@@ -97,7 +98,8 @@ namespace KanbanTracker.Test
                             Title = "Unit Testing",
                             Description = "Seeded data",
                             Created = DateTime.Now,
-                            Status = "In-progress",
+                            Status = "readytogo",
+                            Assigned = "marsden@phillip.com",
                             Tags = new List<string>
                             {
                                 "unitTests"
@@ -135,7 +137,8 @@ namespace KanbanTracker.Test
                             Title = "Unit Testing",
                             Description = "Seeded data",
                             Created = DateTime.Now,
-                            Status = "In-progress",
+                            Status = "readytogo",
+                            Assigned = "marsden@phillip.com",
                             Tags = new List<string>
                             {
                                 "unitTests"
@@ -163,7 +166,8 @@ namespace KanbanTracker.Test
                             Title = "Unit Testing",
                             Description = "Seeded data",
                             Created = DateTime.Now,
-                            Status = "In-progress",
+                            Status = "readytogo",
+                            Assigned = "marsden@phillip.com",
                             Tags = new List<string>
                             {
                                 "unitTests"
@@ -199,7 +203,8 @@ namespace KanbanTracker.Test
                             Title = "Unit Testing",
                             Description = "Seeded data",
                             Created = DateTime.Now,
-                            Status = "In-progress",
+                            Status = "readytogo",
+                            Assigned = "marsden@phillip.com",
                             Tags = new List<string>
                             {
                                 "unitTests"
@@ -227,7 +232,8 @@ namespace KanbanTracker.Test
                             Title = "Unit Testing",
                             Description = "Seeded data",
                             Created = DateTime.Now,
-                            Status = "In-progress",
+                            Status = "readytogo",
+                            Assigned = "marsden@phillip.com",
                             Tags = new List<string>
                             {
                                 "unitTests"

@@ -22,7 +22,7 @@ namespace KanbanTracker.Models
     /// <summary>
     /// Change the MongoClient location depending on the install of MongoDb - default used here.
     /// </summary>
-    public static class ProjectDb
+    public class ProjectDb
     {
         public static MongoCollection<Project> Open()
         {

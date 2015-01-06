@@ -43,6 +43,8 @@ namespace KanbanTracker.Validation
             {
                 userFind.SessionId = ObjectId.GenerateNewId().ToString();
                 users.Save(userFind);
+
+                User.CurrentUser = userFind;
             }
 
             return passwordVerify;

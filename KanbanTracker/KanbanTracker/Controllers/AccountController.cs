@@ -13,7 +13,6 @@ THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,
 EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED 
 WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
 \***************************************************************************/
-
 using System;
 using System.Threading.Tasks;
 using System.Web;
@@ -71,7 +70,7 @@ namespace KanbanTracker.Controllers
                 Response.Cookies["sid"].Expires = DateTime.Now.AddMinutes(30);
 
                 @ViewBag.Info = (string.Format("Welcome, {0}", model.Email));
-                return RedirectToAction("dashboard", "projects");
+                return RedirectToAction("index", "projects");
             }
 
             // If we got this far, something failed, redisplay form

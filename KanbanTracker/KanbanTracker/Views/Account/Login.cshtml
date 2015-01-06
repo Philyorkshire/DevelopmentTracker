@@ -6,10 +6,6 @@
             <hgroup class="title">
                 <h1>Login</h1>
             </hgroup>
-            <p>
-                Default page
-           
-            </p>
             @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
  @Html.AntiForgeryToken()

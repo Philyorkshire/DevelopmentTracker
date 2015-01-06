@@ -1,5 +1,39 @@
-﻿@{
-    ViewBag.Title = "Index";
+﻿@using KanbanTracker.Classes
+@using KanbanTracker.Models
+@using MongoDB.Driver
+
+@functions {
+    public MongoCollection<Project> Open;
 }
 
-<h2>Index</h2>
+@{
+    Open = ProjectDb.Open();
+}
+
+@*.Where(u => u.Owner == KanbanTracker.Classes.User.CurrentUser.Id)*@
+
+<div class="content-wrapper">
+    <h1>Projects</h1>
+    <table>
+        <tr>
+            <td>Title</td> 
+            <td>Description</td>
+            <td>Created</td>
+            <td>Due Date</td>
+            <td></td>
+            <td></td>
+        </tr>
+    
+        @foreach (var project in Open.FindAll())
+        {   <tr>  
+                <td>@project.Title</td>
+                <td>@project.Description</td>
+                <td>@project.Created</td>
+                <td>@project.DueDate</td>
+                <td><a href="dashboard/@project.Id">View</a></td>
+                <td><a href="delete/@project.Id">Delete</a></td>
+            </tr>
+        }
+    
+    </table>
+</div>

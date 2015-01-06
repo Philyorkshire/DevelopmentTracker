@@ -37,7 +37,7 @@ namespace KanbanTracker.Classes
                 var datetimeSid = (ObjectId.Parse(httpCookie.Value).CreationTime);
                 var duration = DateTime.Now - datetimeSid;
 
-                if (duration.Minutes > 1 || !UserValidation.CheckSession(ObjectId.Parse(httpCookie.Value)))
+                if (duration.Minutes > 10 || !UserValidation.CheckSession(ObjectId.Parse(httpCookie.Value)))
                 {
                     filterContext.Result =
                         new RedirectToRouteResult(new RouteValueDictionary

@@ -137,7 +137,6 @@ namespace KanbanTracker.Controllers
         public HttpResponseMessage DeleteAProjectStory(string projectId, string storyId)
         {
             var query = Query.And(Query.EQ("_id", ObjectId.Parse(projectId)));
-
             var update = Update.Pull("Stories", new BsonDocument{
                              { "_id", ObjectId.Parse(storyId) }
                 });

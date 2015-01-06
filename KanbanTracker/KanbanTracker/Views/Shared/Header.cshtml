@@ -8,29 +8,38 @@
         @{
             if (Auth.Authenticated)
             {
-                <form class="createproject" action="../projects/create">
-                    <input type="submit" value="Create Project">
-                </form>
-            
-                <select id="projects">
-                    <option>Option</option>
-                </select>
-            
                 <div class="nav">
-                    <a href="@Url.Action("dashboard", "projects")">Dashboard</a>
-                    <a href="@Url.Action("index", "account")">Account</a>
-                    <a href="@Url.Action("logout", "account")">Logout</a>
+                    <div class="drop">
+                    <ul class="drop_menu">
+                    <li><a href='#'>@KanbanTracker.Classes.User.CurrentUser.UserName</a>
+	                    <ul>
+	                    <li><a href="@Url.Action("index", "account")">Account</a></li>
+	                    <li><a href="@Url.Action("logout", "account")">Logout</a></li>
+	                    </ul>
+                    </li>
+                    <li><a href="@Url.Action("create", "projects")">Create Project</a></li>
+                    <li><a href='#'>Link 3</a>
+	                    <ul>
+	                    <li><a href='#'>Sub Link 1</a></li>
+	                    <li><a href='#'>Sub Link 2</a></li>
+	                    <li><a href='#'>Sub Link 3</a></li>
+	                    <li><a href='#'>Sub Link 4</a></li>
+	                    </ul>
+                    </li>
+                    </ul>
+                    </div>
                 </div>
             }
 
             else
             {
                 <div class="nav">
-                    <a href="@Url.Action("dashboard", "projects")">Dashboard</a>
-                    <a href="@Url.Action("index", "account")">Account</a>
-                    <a href="@Url.Action("login", "account")">Login</a>
-                    <a href="@Url.Action("register", "account")">Register</a>
-                    <a href="@Url.Action("wiki", "home")">Wiki</a>
+                    <div class="drop">
+                    <ul class="drop_menu">
+                    <li><a href="@Url.Action("login", "account")">Login</a></li>
+                    <li><a href="@Url.Action("register", "account")">Register</a></li>
+                    </ul>
+                    </div>
                 </div>
             }
         }

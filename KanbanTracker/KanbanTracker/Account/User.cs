@@ -24,5 +24,7 @@ namespace KanbanTracker.Classes
     {
         [BsonRepresentation(BsonType.ObjectId)]
         public virtual string SessionId { get; set; }
+
+        public static User CurrentUser;
     }
 }

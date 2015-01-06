@@ -1,10 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Web.Mvc;
 using KanbanTracker.Classes;
 using KanbanTracker.Models;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoDB.Driver.Builders;
 
 namespace KanbanTracker.Controllers
 {
@@ -32,6 +33,7 @@ namespace KanbanTracker.Controllers
                 {
                     Id = ObjectId.GenerateNewId().ToString(),
                     Title = model.Title,
+                    Owner = model.Owner,
                     Description = model.Description,
                     Created = DateTime.Now,
                     DueDate = model.DueDate
@@ -41,19 +43,102 @@ namespace KanbanTracker.Controllers
                 @ViewBag.Info = (string.Format("Project created: {0}", project.Title));
             }
 
-            return RedirectToAction("dashboard", "projects");
+            return RedirectToAction("index", "projects"); 
         }
 
         public ActionResult Create()
         {
+            @ViewBag.users = UserDb.Open();
             return View();
         }
 
-        
-        public ActionResult Dashboard()
+        public ActionResult Dashboard(string id)
+        {
+            @ViewBag.id = id;
+            return View();
+        }
+
+        public ActionResult Story_Create(string id)
         {
             return View();
-        } 
+        }
+
+        public ActionResult Story_Edit(string id, string storyId)
+        {
+            @ViewBag.id = id;
+            @ViewBag.storyId = storyId;
+            return View();
+        }
+
+        [HttpPost]
+        public RedirectToRouteResult Story_Edit(string id, StoryViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var project = _open.FindOneById(ObjectId.Parse(model.ProjectId));
+                var story = project.Stories.Find(s => s.Id == model.Id);
+                story.Status = model.Status;
+                story.Title = model.Title;
+                story.Description = model.Description;
+                story.Assigned = model.Assigned;
+                _open.Save(project);
+            }
+
+            return RedirectToAction("dashboard", "projects", new { id = model.ProjectId });
+        }
+
+        public RedirectToRouteResult Story_Delete(string id, string storyId)
+        {
+            if (ModelState.IsValid)
+            {
+                var query = Query.And(Query.EQ("_id", ObjectId.Parse(id)));
+                var update = Update.Pull("Stories", new BsonDocument{
+                             { "_id", ObjectId.Parse(storyId) }
+                });
+
+                _open.Update(query, update);
+            }
+            
+            return RedirectToAction("dashboard", "projects", new { id });
+        }
+
+        [HttpPost]
+        public RedirectToRouteResult Story_Create(string id, StoryViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var story = new Story
+                {
+                    Id = ObjectId.GenerateNewId().ToString(),
+                    Title = model.Title,
+                    Description = model.Description,
+                    Assigned = model.Assigned,
+                    Created = DateTime.Now,
+                    Status = "backlog"
+                };
+
+                _open.Update(Query.EQ("_id", (ObjectId.Parse(id))),
+                    Update.PushAllWrapped("Stories", story));
+
+                @ViewBag.info = (string.Format("Story created: {0}", story.Title));
+            }
+
+            return RedirectToAction("index", "projects"); 
+        }
+
+        public RedirectToRouteResult Delete(string id)
+        {
+            _open.Remove(new QueryDocument("_id", new BsonObjectId(new ObjectId(id))));
+            return RedirectToAction("index", "projects"); 
+        }
+
+        public ActionResult Story(string id, string storyId)
+        {
+            @ViewBag.id = id;
+            @ViewBag.story = storyId;
+
+            return View();
+        }
 
     }
 }

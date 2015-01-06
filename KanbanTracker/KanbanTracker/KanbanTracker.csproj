@@ -111,10 +111,12 @@
     <Compile Include="Classes\Story.cs" />
     <Compile Include="Classes\Task.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BugController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\RedirectController.cs" />
+    <Compile Include="Controllers\StoryController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -234,6 +236,12 @@
     <Content Include="Views\Shared\Header.cshtml" />
     <Content Include="Views\Projects\Dashboard.cshtml" />
     <Content Include="Views\Projects\Index.cshtml" />
+    <Content Include="Views\Bug\Create.cshtml" />
+    <Content Include="Views\Story\Create.cshtml" />
+    <Content Include="Views\Projects\Story_Create.cshtml" />
+    <Content Include="Views\Projects\Story.cshtml" />
+    <Content Include="Views\Projects\Story_Edit.cshtml" />
+    <Content Include="Views\Projects\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

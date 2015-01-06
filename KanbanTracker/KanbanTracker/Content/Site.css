@@ -109,6 +109,7 @@ h4, h5, h6 {
     color: #000;
     margin-bottom: 0;
     padding-bottom: 0;
+    text-decoration: none;
 }
 
 h1 {
@@ -129,6 +130,7 @@ h4 {
 
 h5, h6 {
     font-size: 1em;
+    margin-top: 0;
 }
 
     h5 a:link, h5 a:visited, h5 a:active {
@@ -799,4 +801,49 @@ tr.pager td {
         footer p {
             margin: 0;
         }
+}
+
+
+/* CSSTerm.com Simple Horizontal DropDown CSS menu */
+
+.drop_menu {
+	padding:0;
+	margin:0;
+	list-style-type:none;
+	height:30px;
+}
+.drop_menu li { float:left; }
+.drop_menu li a {
+	padding:9px 20px;
+	display:block;
+	color:#fff;
+	text-decoration:none;
+	font:12px arial, verdana, sans-serif;
+}
+
+/* Submenu */
+.drop_menu ul {
+	position:absolute;
+	left:-9999px;
+	top:-9999px;
+	list-style-type:none;
+}
+.drop_menu li:hover { position:relative;}
+.drop_menu li:hover ul {
+	left:0px;
+	top:30px;
+	padding:0px;
+    background:#005555;
+}
+
+.drop_menu li:hover ul li a {
+	padding:5px;
+	display:block;
+	width:168px;
+	text-indent:15px;
+}
+.drop_menu li:hover ul li a:hover { background:#005555; }
+
+a {
+    text-decoration: none;
 }
