@@ -16,143 +16,150 @@
 }
 
 <div class="content-wrapper">
-<h1>@p.Title</h1>
-<p>@p.Description</p>
-<a href="/projects/story_create/@p.Id">Add story</a>
+    <h1>@p.Title</h1>
+    <p>Description: @p.Description</p>
+    <p>Creator: @p.Owner</p>
+    <p>Due Date: @p.DueDate</p>
 </div>
 
 <div class="content">
-
-    <div class="backlog sections">
-        <h4>Backlog</h4>
-        @if ("54a4d1d0d7aa0b1ae48da9f4" == KanbanTracker.Classes.User.CurrentUser.Id)
-        {
-            foreach (var story in s)
+    
+    @if (s != null)
+    {
+        <div class="backlog sections">
+            <h4>Backlog</h4>
+            @if ("54a4d1d0d7aa0b1ae48da9f4" == KanbanTracker.Classes.User.CurrentUser.Id)
             {
-                if (story.Status == "backlog")
+                foreach (var story in s)
                 {
-                    <div class="cards">
-                        <div class="card">
-                            <a href="/projects/story_edit/@p.Id?storyId=@story.Id"><h5>@story.Title</h5></a>
-                            <p>@story.Description</p>
+                    if (story.Status == "backlog")
+                    {
+                        <div class="cards">
+                            <div class="card">
+                                <a href="/projects/story_edit/@p.Id?storyId=@story.Id"><h5>@story.Title</h5></a>
+                                <p>@story.Description</p>
+                            </div>
                         </div>
-                    </div>
+                    }
                 }
-            }            
-        }
-    </div>
+            }
+        </div>
 
-    <div class="readytogo sections">
-        <h4>Ready to go</h4>
-        @if ("54a4d1d0d7aa0b1ae48da9f4" == KanbanTracker.Classes.User.CurrentUser.Id)
-        {
-            foreach (var story in s)
+        <div class="readytogo sections">
+            <h4>Ready to go</h4>
+            @if ("54a4d1d0d7aa0b1ae48da9f4" == KanbanTracker.Classes.User.CurrentUser.Id)
             {
-                if (story.Status == "readytogo")
+                foreach (var story in s)
                 {
-                    <div class="cards">
-                        <div class="card">
-                            <a href="/projects/story_edit/@p.Id?storyId=@story.Id"><h5>@story.Title</h5></a>
-                            <p>@story.Description</p>
+                    if (story.Status == "readytogo")
+                    {
+                        <div class="cards">
+                            <div class="card">
+                                <a href="/projects/story_edit/@p.Id?storyId=@story.Id"><h5>@story.Title</h5></a>
+                                <p>@story.Description</p>
+                            </div>
                         </div>
-                    </div>
+                    }
                 }
-            }            
-        }
-    </div>
+            }
+        </div>
 
-<div class="development sections">
-    <h4>Development</h4>
-    @if ("54a4d1d0d7aa0b1ae48da9f4" == KanbanTracker.Classes.User.CurrentUser.Id)
-        {
-            foreach (var story in s)
+        <div class="development sections">
+            <h4>Development</h4>
+            @if ("54a4d1d0d7aa0b1ae48da9f4" == KanbanTracker.Classes.User.CurrentUser.Id)
             {
-                if (story.Status == "development")
+                foreach (var story in s)
                 {
-                    <div class="cards">
-                        <div class="card">
-                            <a href="/projects/story_edit/@p.Id?storyId=@story.Id"><h5>@story.Title</h5></a>
-                            <p>@story.Description</p>
+                    if (story.Status == "development")
+                    {
+                        <div class="cards">
+                            <div class="card">
+                                <a href="/projects/story_edit/@p.Id?storyId=@story.Id"><h5>@story.Title</h5></a>
+                                <p>@story.Description</p>
+                            </div>
                         </div>
-                    </div>
+                    }
                 }
-            }            
-        }
-</div>
+            }
+        </div>
 
-<div class="codereview sections">
-    <h4>Code Review</h4>
-    @if ("54a4d1d0d7aa0b1ae48da9f4" == KanbanTracker.Classes.User.CurrentUser.Id)
-        {
-            foreach (var story in s)
+        <div class="codereview sections">
+            <h4>Code Review</h4>
+            @if ("54a4d1d0d7aa0b1ae48da9f4" == KanbanTracker.Classes.User.CurrentUser.Id)
             {
-                if (story.Status == "codereview")
+                foreach (var story in s)
                 {
-                    <div class="cards">
-                        <div class="card">
-                            <a href="/projects/story_edit/@p.Id?storyId=@story.Id"><h5>@story.Title</h5></a>
-                            <p>@story.Description</p>
+                    if (story.Status == "codereview")
+                    {
+                        <div class="cards">
+                            <div class="card">
+                                <a href="/projects/story_edit/@p.Id?storyId=@story.Id"><h5>@story.Title</h5></a>
+                                <p>@story.Description</p>
+                            </div>
                         </div>
-                    </div>
+                    }
                 }
-            }            
-        }
-</div>
+            }
+        </div>
 
-<div class="testing sections">
-    <h4>Testing</h4>
-   @if ("54a4d1d0d7aa0b1ae48da9f4" == KanbanTracker.Classes.User.CurrentUser.Id)
-        {
-            foreach (var story in s)
+        <div class="testing sections">
+            <h4>Testing</h4>
+            @if ("54a4d1d0d7aa0b1ae48da9f4" == KanbanTracker.Classes.User.CurrentUser.Id)
             {
-                if (story.Status == "testing")
+                foreach (var story in s)
                 {
-                    <div class="cards">
-                        <div class="card">
-                            <a href="/projects/story_edit/@p.Id?storyId=@story.Id"><h5>@story.Title</h5></a>
-                            <p>@story.Description</p>
+                    if (story.Status == "testing")
+                    {
+                        <div class="cards">
+                            <div class="card">
+                                <a href="/projects/story_edit/@p.Id?storyId=@story.Id"><h5>@story.Title</h5></a>
+                                <p>@story.Description</p>
+                            </div>
                         </div>
-                    </div>
+                    }
                 }
-            }            
-        }
-</div>
+            }
+        </div>
 
-<div class="complete sections">
-    <h4>Complete</h4>
-        @if ("54a4d1d0d7aa0b1ae48da9f4" == KanbanTracker.Classes.User.CurrentUser.Id)
-        {
-            foreach (var story in s)
+        <div class="complete sections">
+            <h4>Complete</h4>
+            @if ("54a4d1d0d7aa0b1ae48da9f4" == KanbanTracker.Classes.User.CurrentUser.Id)
             {
-                if (story.Status == "complete")
+                foreach (var story in s)
                 {
-                    <div class="cards">
-                        <div class="card">
-                            <a href="/projects/story_edit/@p.Id?storyId=@story.Id"><h5>@story.Title</h5></a>
-                            <p>@story.Description</p>
+                    if (story.Status == "complete")
+                    {
+                        <div class="cards">
+                            <div class="card">
+                                <a href="/projects/story_edit/@p.Id?storyId=@story.Id"><h5>@story.Title</h5></a>
+                                <p>@story.Description</p>
+                            </div>
                         </div>
-                    </div>
+                    }
                 }
-            }            
-        }
-</div>
+            }
+        </div>
 
-<div class="accepted sections">
-    <h4>Accepted</h4>
-    @if ("54a4d1d0d7aa0b1ae48da9f4" == KanbanTracker.Classes.User.CurrentUser.Id)
-        {
-            foreach (var story in s)
+        <div class="accepted sections">
+            <h4>Accepted</h4>
+            @if ("54a4d1d0d7aa0b1ae48da9f4" == KanbanTracker.Classes.User.CurrentUser.Id)
             {
-                if (story.Status == "accepted")
+                foreach (var story in s)
                 {
-                    <div class="cards">
-                        <div class="card">
-                            <a href="/projects/story_edit/@p.Id?storyId=@story.Id"><h5>@story.Title</h5></a>
-                            <p>@story.Description</p>
+                    if (story.Status == "accepted")
+                    {
+                        <div class="cards">
+                            <div class="card">
+                                <a href="/projects/story_edit/@p.Id?storyId=@story.Id"><h5>@story.Title</h5></a>
+                                <p>@story.Description</p>
+                            </div>
                         </div>
-                    </div>
+                    }
                 }
-            }            
-        }
-</div>
+            }
+        </div>
+
+    }
+    
+    <a href="/projects/story_create/@p.Id">Add story</a>
 </div>

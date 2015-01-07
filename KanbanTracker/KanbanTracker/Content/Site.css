@@ -131,6 +131,7 @@ h4 {
 h5, h6 {
     font-size: 1em;
     margin-top: 0;
+    margin-bottom: -20px;
 }
 
     h5 a:link, h5 a:visited, h5 a:active {

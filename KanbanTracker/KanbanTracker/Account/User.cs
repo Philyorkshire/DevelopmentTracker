@@ -14,6 +14,7 @@ EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED
 WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
 \***************************************************************************/
 
+using KanbanTracker.Models;
 using MongoDB.AspNet.Identity;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
@@ -26,5 +27,12 @@ namespace KanbanTracker.Classes
         public virtual string SessionId { get; set; }
 
         public static User CurrentUser;
+
+        public static string GetUserFromId(string id)
+        {
+            var open = UserDb.Open();
+            var user = open.FindOneById(ObjectId.Parse(id));
+            return user.UserName;
+        }
     }
 }

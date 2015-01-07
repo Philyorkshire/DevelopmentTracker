@@ -84,7 +84,7 @@ namespace KanbanTracker.Test
                                     Id = ObjectId.GenerateNewId().ToString(),
                                     Description = "This is a new comment - seeded",
                                     Created = DateTime.Now,
-                                    OwnerId = "123456789"
+                                    OwnerId = "54a4d1d0d7aa0b1ae48da9f4"
                                 }
                             }
                         }
@@ -112,7 +112,7 @@ namespace KanbanTracker.Test
                                     Id = ObjectId.GenerateNewId().ToString(),
                                     Description = "This is a new comment - seeded",
                                     Created = DateTime.Now,
-                                    OwnerId = "123456789"
+                                    OwnerId = "54a4d1d0d7aa0b1ae48da9f4"
                                 }
                             }
                         }
@@ -151,7 +151,7 @@ namespace KanbanTracker.Test
                                     Id = ObjectId.GenerateNewId().ToString(),
                                     Description = "This is a new comment - seeded",
                                     Created = DateTime.Now,
-                                    OwnerId = "123456789"
+                                    OwnerId = "54a4d1d0d7aa0b1ae48da9f4"
                                 }
                             }
 
@@ -180,7 +180,7 @@ namespace KanbanTracker.Test
                                     Id = ObjectId.GenerateNewId().ToString(),
                                     Description = "This is a new comment - seeded",
                                     Created = DateTime.Now,
-                                    OwnerId = "123456789"
+                                    OwnerId = "54a4d1d0d7aa0b1ae48da9f4"
                                 }
                             }
                         }
@@ -217,7 +217,7 @@ namespace KanbanTracker.Test
                                     Id = ObjectId.GenerateNewId().ToString(),
                                     Description = "This is a new comment - seeded",
                                     Created = DateTime.Now,
-                                    OwnerId = "123456789"
+                                    OwnerId = "54a4d1d0d7aa0b1ae48da9f4"
                                 }
                             }
 
@@ -246,7 +246,7 @@ namespace KanbanTracker.Test
                                     Id = ObjectId.GenerateNewId().ToString(),
                                     Description = "This is a new comment - seeded",
                                     Created = DateTime.Now,
-                                    OwnerId = "123456789"
+                                    OwnerId = "54a4d1d0d7aa0b1ae48da9f4"
                                 }
                             }
                         }

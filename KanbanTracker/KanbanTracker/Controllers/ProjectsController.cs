@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using System.Web.Mvc;
 using KanbanTracker.Classes;
@@ -36,7 +37,9 @@ namespace KanbanTracker.Controllers
                     Owner = model.Owner,
                     Description = model.Description,
                     Created = DateTime.Now,
-                    DueDate = model.DueDate
+                    DueDate = model.DueDate,
+                    Stories = new List<Story>(),
+                    Bugs = new List<Bug>()
                 };
 
                 _open.Save(project);
@@ -73,16 +76,13 @@ namespace KanbanTracker.Controllers
         [HttpPost]
         public RedirectToRouteResult Story_Edit(string id, StoryViewModel model)
         {
-            if (ModelState.IsValid)
-            {
                 var project = _open.FindOneById(ObjectId.Parse(model.ProjectId));
                 var story = project.Stories.Find(s => s.Id == model.Id);
                 story.Status = model.Status;
-                story.Title = model.Title;
-                story.Description = model.Description;
-                story.Assigned = model.Assigned;
+                //story.Title = model.Title;
+                //story.Description = model.Description;
+                //story.Assigned = model.Assigned;
                 _open.Save(project);
-            }
 
             return RedirectToAction("dashboard", "projects", new { id = model.ProjectId });
         }
@@ -114,14 +114,46 @@ namespace KanbanTracker.Controllers
                     Description = model.Description,
                     Assigned = model.Assigned,
                     Created = DateTime.Now,
-                    Status = "backlog"
+                    Status = model.Status,
+                    Comments = new List<Comment>()
                 };
 
-                _open.Update(Query.EQ("_id", (ObjectId.Parse(id))),
-                    Update.PushAllWrapped("Stories", story));
+                var project = _open.FindOneById(ObjectId.Parse(id));
+                project.Stories.Add(story);
+                _open.Save(project);
 
                 @ViewBag.info = (string.Format("Story created: {0}", story.Title));
             }
+
+            return RedirectToAction("index", "projects"); 
+        }
+
+        [HttpPost]
+        public RedirectToRouteResult Comment_Create(CommentViewModel model)
+        {
+
+            var comment = new Comment 
+            {
+                Description = model.Description,
+                OwnerId = Classes.User.CurrentUser.Id,
+                Created = DateTime.Now
+            };
+
+            var project = _open.FindOneById(ObjectId.Parse(model.ProjectId));
+
+            if (model.ElementType != "bug")
+            {
+                var element = project.Stories.Find(s => s.Id == model.ElementId);
+                element.Comments.Add(comment);
+            }
+
+            else
+            {
+                var element = project.Bugs.Find(s => s.Id == model.ElementId);
+                element.Comments.Add(comment);
+            }
+
+            _open.Save(project);
 
             return RedirectToAction("index", "projects"); 
         }

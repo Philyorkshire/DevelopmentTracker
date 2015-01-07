@@ -120,7 +120,7 @@ namespace KanbanTracker.Controllers
             };
             try
             {
-                _open.Update(Query.EQ("_id", (ObjectId.Parse(id))),
+                _open.Update(Query.EQ("_id", ObjectId.Parse(id)),
                     Update.PushAllWrapped("Stories", newStory));
 
                 return Request.CreateResponse(HttpStatusCode.Accepted, newStory);

@@ -43,5 +43,11 @@ namespace KanbanTracker.Classes
 
         public List<Story> Stories { get; set; }
         public List<Bug> Bugs { get; set; }
-    } 
+
+        public int DateUntilCompletion(DateTime date)
+        {
+            var duration = DateTime.Now - date;
+            return duration.Days;
+        }
+    }
 }

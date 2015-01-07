@@ -1,12 +1,10 @@
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker\bin\KanbanTracker.dll
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker\bin\KanbanTracker.pdb
-C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker\bin\Antlr3.Runtime.dll
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker\bin\EntityFramework.dll
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker\bin\Microsoft.AspNet.Identity.Core.dll
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker\bin\MongoDB.AspNet.Identity.dll
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker\bin\MongoDB.Bson.dll
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker\bin\MongoDB.Driver.dll
-C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker\bin\Newtonsoft.Json.dll
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker\bin\System.Net.Http.Formatting.dll
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker\bin\System.Web.Http.dll
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker\bin\System.Web.Http.WebHost.dll
@@ -15,11 +13,9 @@ C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker\bin\System.Web.Providers.dll
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker\bin\System.Web.WebPages.dll
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker\bin\System.Web.WebPages.Razor.dll
-C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker\bin\WebGrease.dll
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker\bin\Microsoft.AspNet.Identity.Core.xml
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker\bin\MongoDB.Bson.xml
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker\bin\MongoDB.Driver.xml
-C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker\bin\Newtonsoft.Json.xml
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker\bin\System.Net.Http.Formatting.xml
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker\bin\System.Web.Http.xml
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker\bin\System.Web.Http.WebHost.xml
@@ -29,4 +25,9 @@ C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker\bin\System.Web.WebPages.Razor.xml
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker\obj\Debug\KanbanTracker.dll
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker\obj\Debug\KanbanTracker.pdb
+C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker\bin\Newtonsoft.Json.dll
+C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker\bin\Newtonsoft.Json.xml
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker\obj\Debug\KanbanTracker.csprojResolveAssemblyReference.cache
+C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker\bin\Antlr3.Runtime.dll
+C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker\bin\WebGrease.dll
+C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker\bin\Antlr3.Runtime.pdb
