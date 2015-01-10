@@ -22,6 +22,7 @@ using KanbanTracker.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoDB.Driver.Builders;
 
 namespace KanbanTracker.Test
 {
@@ -46,7 +47,7 @@ namespace KanbanTracker.Test
         [TestMethod]
         public void RemoveAllProjects()
         {
-            _open.RemoveAll();
+            _open.Remove(Query.EQ("Description", "Seeded data"));
         }
 
         [TestMethod]

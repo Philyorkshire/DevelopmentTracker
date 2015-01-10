@@ -1,5 +1,4 @@
-﻿@using System.Collections
-@using KanbanTracker.Classes
+﻿@using KanbanTracker.Classes
 @using KanbanTracker.Models
 @using MongoDB.Bson
 @using MongoDB.Driver
@@ -22,8 +21,21 @@
     var testingCount = s.Count(i => i.Status == "testing") + b.Count(i => i.Status == "testing");
     var completeCount = s.Count(i => i.Status == "complete") + b.Count(i => i.Status == "complete");
     var acceptedCount = s.Count(i => i.Status == "accepted") + b.Count(i => i.Status == "accepted");
+
+    var comments = new List<Comment>();
+    var commentCount = 0;
     
-    
+    foreach (var bug in b)
+    {
+        comments.AddRange(bug.Comments);
+    }
+
+    foreach (var story in s)
+    {
+        comments.AddRange(story.Comments);
+    }
+
+    comments.OrderByDescending(d => d.Created);
 }
 
 <div class="content-wrapper">
@@ -296,5 +308,24 @@
 </div>
 <div class="content-wrapper">
     <h2>Recent Activity</h2><hr/>
+    @foreach (var comment in comments)
+            {
+                if (commentCount%2 == 0)
+                {
+                    <div class="evenComment">
+                        <p>@comment.Created, @comment.Description</p>
+                        <sup>@KanbanTracker.Classes.User.GetUserFromId(@comment.OwnerId)</sup>
+                    </div>
+                }
 
+                else
+                {
+                    <div class="oddComment">
+                        <p>@comment.Created, @comment.Description</p>
+                        <sup>@KanbanTracker.Classes.User.GetUserFromId(@comment.OwnerId)</sup>
+                    </div>
+                }
+
+                commentCount++;
+            }
 </div>

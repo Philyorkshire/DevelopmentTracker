@@ -88,12 +88,49 @@ namespace KanbanTracker.Controllers
         [HttpPost]
         public RedirectToRouteResult Story_Edit(string id, StoryViewModel model)
         {
-                var project = _open.FindOneById(ObjectId.Parse(model.ProjectId));
-                var story = project.Stories.Find(s => s.Id == model.Id);
+            var project = _open.FindOneById(ObjectId.Parse(model.ProjectId));
+            var story = project.Stories.Find(s => s.Id == model.Id);
+
+            var status = model.Status != story.Status;
+            var description = model.Description != story.Description;
+            var assigned = model.Assigned != story.Assigned;
+
+            var comment = new Comment
+            {
+                Created = DateTime.Now,
+                Description = "",
+                OwnerId = Classes.User.CurrentUser.Id
+            };
+
+            if (status)
+            {
+                comment.Description += string.Format("Status changed from '{1}' => '{0}'. ",
+                    model.Status, story.Status);
+            }
+
+            if (description)
+            {
+                comment.Description += string.Format("Description changed from '{1}' => '{0}'. ",
+                    model.Description, story.Description);
+            }
+
+            if (assigned)
+            {
+                comment.Description += string.Format("Assigned changed from '{1}' => '{0}'. ",
+                    Classes.User.GetUserFromId(model.Assigned), Classes.User.GetUserFromId(story.Assigned));
+            }
+
                 story.Status = model.Status;
-                    story.Description = model.Description;
-                    story.Assigned = model.Assigned;
-                _open.Save(project);
+                story.Description = model.Description;
+                story.Assigned = model.Assigned;
+
+            if (comment.Description != "")
+            {
+                comment.Description = comment.Description.Insert(0, string.Format("'{0}' updated ", story.Title));
+                story.Comments.Add(comment);
+            }
+
+            _open.Save(project);
 
             return RedirectToAction("dashboard", "projects", new { id = model.ProjectId });
         }
@@ -103,9 +140,46 @@ namespace KanbanTracker.Controllers
         {
             var project = _open.FindOneById(ObjectId.Parse(model.ProjectId));
             var bug = project.Bugs.Find(s => s.Id == model.Id);
-                bug.Status = model.Status;
-                bug.Description = model.Description;
-                bug.Assigned = model.Assigned;
+
+            var status = model.Status != bug.Status;
+            var description = model.Description != bug.Description;
+            var assigned = model.Assigned != bug.Assigned;
+
+            var comment = new Comment
+            {
+                Created = DateTime.Now,
+                Description = "",
+                OwnerId = Classes.User.CurrentUser.Id
+            };
+
+            if (status)
+            {
+                comment.Description += string.Format("Status changed from '{1}' => '{0}'. ",
+                    model.Status, bug.Status);
+            }
+
+            if (description)
+            {
+                comment.Description += string.Format("Description changed from '{1}' => '{0}'. ",
+                    model.Description, bug.Description);
+            }
+
+            if (assigned)
+            {
+                comment.Description += string.Format("Assigned changed from '{1}' => '{0}'. ",
+                    Classes.User.GetUserFromId(model.Assigned), Classes.User.GetUserFromId(bug.Assigned));
+            }
+
+            bug.Status = model.Status;
+            bug.Description = model.Description;
+            bug.Assigned = model.Assigned;
+
+            if (comment.Description != "")
+            {
+                comment.Description = comment.Description.Insert(0, string.Format("'{0}' updated ", bug.Title));
+                bug.Comments.Add(comment);
+            }
+
             _open.Save(project);
 
             return RedirectToAction("dashboard", "projects", new { id = model.ProjectId });

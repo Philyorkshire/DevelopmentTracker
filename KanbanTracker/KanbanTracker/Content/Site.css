@@ -8,6 +8,19 @@ html {
 
 .description {
     width: 99%;
+    min-height: 200px;
+}
+
+.oddComment, .evenComment {
+    padding: 10px;
+}
+
+.oddComment {
+    background-color: #7ac0da;
+}
+
+.evenComment {
+    background-color: #a6dbed;
 }
 
 select {
