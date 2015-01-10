@@ -126,6 +126,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BugViewModel.cs" />
     <Compile Include="Models\CommentViewModel.cs" />
     <Compile Include="Models\UserDb.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
@@ -250,6 +251,8 @@
     <Content Include="Views\Projects\Story.cshtml" />
     <Content Include="Views\Projects\Story_Edit.cshtml" />
     <Content Include="Views\Projects\Delete.cshtml" />
+    <Content Include="Views\Projects\Bug_Edit.cshtml" />
+    <Content Include="Views\Projects\Bug_Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

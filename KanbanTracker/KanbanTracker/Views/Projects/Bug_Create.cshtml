@@ -1,7 +1,7 @@
 ﻿@using KanbanTracker.Classes
 @using KanbanTracker.Models
 @using MongoDB.Driver
-@model KanbanTracker.Models.StoryViewModel
+@model KanbanTracker.Models.BugViewModel
 
 @functions {
     public MongoCollection<User> Open;
@@ -15,9 +15,9 @@
     <section class="featured">
         <div class="content-wrapper">
             <hgroup class="title">
-                <h1>Create a new story</h1>
+                <h1>Create a new Bugs</h1>
             </hgroup>
-            @using (Html.BeginForm("Story_Create", "Projects", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            @using (Html.BeginForm("Bug_Create", "Projects", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary("", new { @class = "text-danger" })
@@ -63,7 +63,7 @@
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" class="btn btn-default" value="Create story" />
+                        <input type="submit" class="btn btn-default" value="Create Bug" />
                     </div>
                 </div>
             }</div>

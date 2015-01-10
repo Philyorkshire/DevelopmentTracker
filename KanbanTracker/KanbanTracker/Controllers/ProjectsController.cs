@@ -66,11 +66,23 @@ namespace KanbanTracker.Controllers
             return View();
         }
 
+        public ActionResult Bug_Create(string id)
+        {
+            return View();
+        }
+
         public ActionResult Story_Edit(string id, string storyId)
         {
             @ViewBag.id = id;
             @ViewBag.storyId = storyId;
             return View();
+        }
+
+        public ActionResult Bug_Edit(string id, string storyId)
+        {
+            @ViewBag.id = id;
+            @ViewBag.bugId = storyId; 
+            return View(); 
         }
 
         [HttpPost]
@@ -79,10 +91,22 @@ namespace KanbanTracker.Controllers
                 var project = _open.FindOneById(ObjectId.Parse(model.ProjectId));
                 var story = project.Stories.Find(s => s.Id == model.Id);
                 story.Status = model.Status;
-                //story.Title = model.Title;
-                //story.Description = model.Description;
-                //story.Assigned = model.Assigned;
+                    story.Description = model.Description;
+                    story.Assigned = model.Assigned;
                 _open.Save(project);
+
+            return RedirectToAction("dashboard", "projects", new { id = model.ProjectId });
+        }
+
+        [HttpPost]
+        public RedirectToRouteResult Bug_Edit(string id, StoryViewModel model)
+        {
+            var project = _open.FindOneById(ObjectId.Parse(model.ProjectId));
+            var bug = project.Bugs.Find(s => s.Id == model.Id);
+                bug.Status = model.Status;
+                bug.Description = model.Description;
+                bug.Assigned = model.Assigned;
+            _open.Save(project);
 
             return RedirectToAction("dashboard", "projects", new { id = model.ProjectId });
         }
@@ -126,6 +150,32 @@ namespace KanbanTracker.Controllers
             }
 
             return RedirectToAction("index", "projects"); 
+        }
+
+        [HttpPost]
+        public RedirectToRouteResult Bug_Create(string id, BugViewModel model) 
+        {
+            if (ModelState.IsValid)
+            {
+                var bug = new Bug
+                {
+                    Id = ObjectId.GenerateNewId().ToString(),
+                    Title = model.Title,
+                    Description = model.Description,
+                    Assigned = model.Assigned,
+                    Created = DateTime.Now,
+                    Status = model.Status,
+                    Comments = new List<Comment>()
+                };
+
+                var project = _open.FindOneById(ObjectId.Parse(id));
+                project.Bugs.Add(bug);
+                _open.Save(project);
+
+                @ViewBag.info = (string.Format("Bug created: {0}", bug.Title));
+            }
+
+            return RedirectToAction("index", "projects");
         }
 
         [HttpPost]

@@ -3,7 +3,7 @@
 @using KanbanTracker.Models
 @using MongoDB.Bson
 @using MongoDB.Driver
-@model KanbanTracker.Models.StoryViewModel
+@model KanbanTracker.Models.BugViewModel
 
 @functions {
     public MongoCollection<User> Open;
@@ -14,30 +14,30 @@
     Open = UserDb.Open();
     ProjectOpen = ProjectDb.Open();
     var individualProject = (Project) ProjectOpen.FindOneById(ObjectId.Parse(@ViewBag.id));
-    var story = individualProject.Stories.Find(s => s.Id == @ViewBag.storyId);
-    var comments = story.Comments;
+    var bug = individualProject.Bugs.Find(s => s.Id == @ViewBag.bugId);
+    var comments = bug.Comments;
 }
 
 <div id="body">
     <section class="featured">
         <div class="content-wrapper">
             <hgroup class="title">
-                <h1>@story.Title</h1>
+                <h1>@bug.Title</h1>
             </hgroup>
-            @using (Html.BeginForm("Story_Edit", "Projects", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            @using (Html.BeginForm("bug_Edit", "Projects", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary("", new { @class = "text-danger" })
 
                 <div class="form-group">
                     <div class="col-md-10">
-                        <textarea class="form-control" data-val="true" data-val-required="The Description field is required." id="Description" name="Description">@story.Description</textarea>
+                        <textarea class="form-control" data-val="true" data-val-required="The Description field is required." id="Description" name="Description">@bug.Description</textarea>
                     </div>
                 </div>
                 
                 <div class="form-group">
                     <div class="col-md-10">
-                        <input class="form-control" data-val="true" data-val-required="The Title field is required." id="Id" name="Id" value="@story.Id" type="hidden"/>
+                        <input class="form-control" data-val="true" data-val-required="The Title field is required." id="Id" name="Id" value="@bug.Id" type="hidden"/>
                         <input class="form-control" data-val="true" data-val-required="The Title field is required." id="ProjectId" name="ProjectId" value="@individualProject.Id" type="hidden"/> 
                     </div>
                 </div>
@@ -71,12 +71,12 @@
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" class="btn btn-default" value="Update story" />
+                        <input type="submit" class="btn btn-default" value="Update bug" />
                     </div>
                 </div>
                 
                 
-            }<a href="/projects/story_delete/@individualProject.Id?storyId=@story.Id">Delete Story</a>
+            }<a href="/projects/bug_delete/@individualProject.Id?bugId=@bug.Id">Delete bug</a>
         
             <h2>Comments</h2>
             <hr/>
@@ -101,9 +101,9 @@
                 
                 <div class="form-group">
                     <div class="col-md-10">
-                        <input class="form-control" data-val="true" id="ElementId" name="ElementId" value="@story.Id" type="hidden"/>
+                        <input class="form-control" data-val="true" id="ElementId" name="ElementId" value="@bug.Id" type="hidden"/>
                         <input class="form-control" data-val="true" id="ProjectId" name="ProjectId" value="@individualProject.Id" type="hidden"/> 
-                        <input class="form-control" data-val="true" id="ElementType" name="ElementType" value="story" type="hidden"/> 
+                        <input class="form-control" data-val="true" id="ElementType" name="ElementType" value="bug" type="hidden"/> 
                     </div>
                 </div>
                 

@@ -24,3 +24,4 @@ C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker.Test\bin\Debug\KanbanTracker.Test.dll.config
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker.Test\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker.Test\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Phillip\Documents\GitHub\DevelopmentTracker\KanbanTracker\KanbanTracker.Test\bin\Debug\System.Web.Optimization.xml
