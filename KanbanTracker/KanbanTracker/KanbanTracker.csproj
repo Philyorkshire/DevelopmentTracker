@@ -246,8 +246,6 @@
     <Content Include="Views\Shared\Header.cshtml" />
     <Content Include="Views\Projects\Dashboard.cshtml" />
     <Content Include="Views\Projects\Index.cshtml" />
-    <Content Include="Views\Bug\Create.cshtml" />
-    <Content Include="Views\Story\Create.cshtml" />
     <Content Include="Views\Projects\Story_Create.cshtml" />
     <Content Include="Views\Projects\Story.cshtml" />
     <Content Include="Views\Projects\Story_Edit.cshtml" />
