@@ -42,6 +42,9 @@ namespace KanbanTracker.Test.ProjectControllerTest
             controller.Request.SetConfiguration(new HttpConfiguration());
         }
 
+        /// <summary>
+        /// Validates API GET request returns all projects.
+        /// </summary>
         [TestMethod]
         public void GetAllProjects()
         {
@@ -54,6 +57,9 @@ namespace KanbanTracker.Test.ProjectControllerTest
             Assert.AreEqual(result.Count(), projects.Count());
         }
 
+        /// <summary>
+        /// Validates API GET request returns a project by id.
+        /// </summary>
         [TestMethod]
         public void GetProjectById()
         {
@@ -67,6 +73,9 @@ namespace KanbanTracker.Test.ProjectControllerTest
             Assert.AreEqual(getProject.Id, value.Id);
         }
 
+        /// <summary>
+        /// Validates API POST request creates a new project.
+        /// </summary>
         [TestMethod]
         public void CreateNewProject()
         {
@@ -91,6 +100,9 @@ namespace KanbanTracker.Test.ProjectControllerTest
             Assert.AreEqual(projectId, value.Id);
         }
 
+        /// <summary>
+        /// Validates API POST request deletes a project by id.
+        /// </summary>
         [TestMethod]
         public void DeleteAProject()
         {

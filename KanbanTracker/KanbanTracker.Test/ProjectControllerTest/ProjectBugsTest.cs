@@ -48,6 +48,9 @@ namespace KanbanTracker.Test.ProjectControllerTest
             return projectId;
         }
 
+        /// <summary>
+        /// Validates API GET request returns all project bugs by id.
+        /// </summary>
         [TestMethod]
         public void GetAllProjectBugs()
         {
@@ -64,6 +67,9 @@ namespace KanbanTracker.Test.ProjectControllerTest
             Assert.AreEqual(projectDbCount, response);
         }
 
+        /// <summary>
+        /// Validates API GET request returns a project bug by id.
+        /// </summary>
         [TestMethod]
         public void GetAProjectBug()
         {
@@ -81,6 +87,9 @@ namespace KanbanTracker.Test.ProjectControllerTest
             Assert.AreEqual(bug.Title, responseBug.Title);
         }
 
+        /// <summary>
+        /// Validates API POST request creates new bug.
+        /// </summary>
         [TestMethod]
         public void CreateANewBug()
         {
@@ -100,6 +109,9 @@ namespace KanbanTracker.Test.ProjectControllerTest
             Assert.AreEqual(HttpStatusCode.Accepted, request.StatusCode);
         }
 
+        /// <summary>
+        /// Validates API POST request deletes a bug by id.
+        /// </summary>
         [TestMethod]
         public void DeleteProjectBug()
         {

@@ -43,12 +43,18 @@ namespace KanbanTracker.Test
             _open = ProjectDb.Open();
         }
 
+        /// <summary>
+        /// Remove all projects in the database that have been created by tests
+        /// </summary>
         [TestMethod]
         public void RemoveAllProjects()
         {
             _open.Remove(Query.And(Query.EQ("Description", "Seeded data")));
         }
 
+        /// <summary>
+        /// Creates stub data for unit tests
+        /// </summary>
         [TestMethod]
         public void SeedDataObjects()
         {

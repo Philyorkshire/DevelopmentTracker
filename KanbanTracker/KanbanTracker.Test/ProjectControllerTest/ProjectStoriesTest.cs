@@ -48,6 +48,9 @@ namespace KanbanTracker.Test.ProjectControllerTest
             return projectId;
         }
 
+        /// <summary>
+        /// Validates API GET request returns all project stories by id.
+        /// </summary>
         [TestMethod]
         public void GetAllProjectStories()
         {
@@ -64,6 +67,9 @@ namespace KanbanTracker.Test.ProjectControllerTest
             Assert.AreEqual(projectDbCount, response);
         }
 
+        /// <summary>
+        /// Validates API GET request returns a project story by id.
+        /// </summary>
         [TestMethod]
         public void GetAProjectStory()
         {
@@ -81,6 +87,9 @@ namespace KanbanTracker.Test.ProjectControllerTest
             Assert.AreEqual(story.Title, responseStory.Title);
         }
 
+        /// <summary>
+        /// Validates API POST request creates new story.
+        /// </summary>
         [TestMethod]
         public void CreateANewStory()
         {
@@ -101,6 +110,9 @@ namespace KanbanTracker.Test.ProjectControllerTest
             Assert.AreEqual(HttpStatusCode.Accepted, request.StatusCode);
         }
 
+        /// <summary>
+        /// Validates API POST request deletes story by id.
+        /// </summary>
         [TestMethod]
         public void DeleteAStory()
         {

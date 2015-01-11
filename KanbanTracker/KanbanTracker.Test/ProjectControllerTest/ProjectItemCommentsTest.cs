@@ -21,7 +21,6 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using KanbanTracker.Classes;
-using KanbanTracker.Classes;
 using KanbanTracker.Controllers;
 using KanbanTracker.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -43,12 +42,21 @@ namespace KanbanTracker.Test.ProjectControllerTest
             _controller.Request.SetConfiguration(new HttpConfiguration());
         }
 
+        /// <summary>
+        /// Returns project id
+        /// </summary>
+        /// <returns>id</returns>
         private string GetAProjectId()
         {
             var projectId = _open.FindOne().Id;
             return projectId;
         }
 
+        /// <summary>
+        /// Returns project story by id
+        /// </summary>
+        /// <param name="projectId"></param>
+        /// <returns>Story</returns>
         private Story GetProjectStory(out string projectId)
         {
             projectId = GetAProjectId();
@@ -57,6 +65,9 @@ namespace KanbanTracker.Test.ProjectControllerTest
             return story;
         }
 
+        /// <summary>
+        /// Validate API GET request returns all project story comments.
+        /// </summary>
         [TestMethod]
         public void GetAllProjectItemComments()
         {
@@ -76,6 +87,9 @@ namespace KanbanTracker.Test.ProjectControllerTest
             Assert.AreEqual(commentCount, response);
         }
 
+        /// <summary>
+        /// Validate API GET request returns a project story comment by id.
+        /// </summary>
         [TestMethod]
         public void GetAProjectItemComment()
         {
@@ -93,6 +107,9 @@ namespace KanbanTracker.Test.ProjectControllerTest
             Assert.AreEqual(comment.Description, responseComment.Description);
         }
 
+        /// <summary>
+        /// Validate API POST request creates new comment.
+        /// </summary>
         [TestMethod]
         public void CreateNewCommentToProjectItem()
         {

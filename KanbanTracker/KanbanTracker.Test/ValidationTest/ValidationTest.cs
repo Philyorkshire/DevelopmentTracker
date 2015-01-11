@@ -27,6 +27,9 @@ namespace KanbanTracker.Test.ValidationTest
 
         public StoryValidation Validation;
 
+        /// <summary>
+        /// Validates a password hash can be created.
+        /// </summary>
         [TestMethod]
         public void CheckPasswordHash()
         {
@@ -34,6 +37,9 @@ namespace KanbanTracker.Test.ValidationTest
             Assert.AreNotEqual(hashPassword, TestPassword);
         }
 
+        /// <summary>
+        /// Validates that a hash password can be validated with correct ASCII password and hash.
+        /// </summary>
         [TestMethod]
         public void ValidateHashedPassword()
         {
