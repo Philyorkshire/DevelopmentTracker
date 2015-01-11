@@ -17,7 +17,6 @@ WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
 using System;
 using System.Collections.Generic;
 using KanbanTracker.Classes;
-using KanbanTracker.Classes;
 using KanbanTracker.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MongoDB.Bson;
@@ -47,7 +46,7 @@ namespace KanbanTracker.Test
         [TestMethod]
         public void RemoveAllProjects()
         {
-            _open.Remove(Query.EQ("Description", "Seeded data"));
+            _open.Remove(Query.And(Query.EQ("Description", "Seeded data")));
         }
 
         [TestMethod]

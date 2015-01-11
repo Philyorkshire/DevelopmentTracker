@@ -1,6 +1,242 @@
-﻿@{
-    ViewBag.Title = "wiki";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿<div class="content-wrapper">
 
-<h2>wiki</h2>
+<p><h2>Development Tracker Specification</h2></p>
+<p> </p>
+<p>A
+   development tracker web service that allows interaction with other systems to
+   manage project stories and bugs which are equally treated as tasks through an
+   agile life cycle.
+</p>
+<p>The
+   development tracker will be defined by two key areas. The primary area of the
+   development tracker will be the web API which will supply the web service
+   interface that can be utilized by varying software and applications within a
+   network. Through the web interface projects elements and user accounts can be
+   managed with CRUD API requests.
+</p>
+<p>Secondly
+   an ASP.NET web interface that will utilize the API completely to manage all
+   elements. The web interface will allow users to quickly be created through a
+   graphical interface and to create projects and their inner elements such as
+   stories, bugs and comments.
+</p>
+<p> </p>
+<p>Package dependencies</p>
+<p>●      VS2013</p>
+<p>●      .NET 4.5</p>
+<p>●      MongoDb</p>
+<p> </p>
+<p>Web Interface</p>
+<p>Functionality</p>
+<p>The
+   web interface will allow the users to CRUD projects, nested stories, bugs and
+   comments to track the development of a project sprint using the kanban style graphical user interface. The elements changed
+   through the interface will change the same elements that are stored for the web
+   API meaning that varying systems can interact with the same data.
+</p>
+<p> </p>
+<p>Interface</p>
+<p>1.     Users will be able to create an
+   account and be assigned to projects.
+</p>
+<p>2.     Each user assigned to projects can
+   change the state of a given story/bug within that project and change elements.
+</p>
+<p>3.     Users can add comments and move
+   elements through the board.
+</p>
+<p>4.     Delete given elements such as stories
+   and bugs.
+</p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>API</p>
+<p>The
+   web api service will allow
+   external services to be able to create, manage and delete projects, stories and
+   users through the defined api requests. The API
+   service will serve either; text, JSON or XML based on the request content type
+   defined by the service interfacing with the API.
+</p>
+<p> </p>
+<p><h2>GET
+   requests</h2>
+</p>
+<p>A
+   successful GET request will return a 200 HTTP response code (OK), with the
+   requested content in the response body, whilst an unsuccessful GET request will
+   return the following response codes; 404 Not found and 403 Bad Request with an
+   appropriate response message to guide the user.
+</p>
+<p> </p>
+<p>1.   
+   All projects - http://url.co.uk/api/projects
+</p>
+<p>2.   
+   An individual project by id -
+   http://url.co.uk/api/projects/{id}
+</p>
+<p>a.   
+   All stories for a project -
+   http://url.co.uk/api/projects/{id}/stories
+</p>
+<p>                                     
+   i.       
+   All comments in story -
+   http://url.co.uk/api/projects/{id}/stories/{id}/comments
+</p>
+<p>                                    
+   ii.       
+   An individual comment in story -
+   http://url.co.uk/api/projects/{id}/stories/{id}/comments/{id}
+</p>
+<p>b.   
+   All bugs for a project -
+   http://url.co.uk/api/projects/{id}/bugs
+</p>
+<p>                                     
+   i.       
+   All comments in bug -
+   http://url.co.uk/api/projects/{id}/bugs/{id}/comments
+</p>
+<p>                                    
+   ii.       
+   An individual comment in bug -
+   http://url.co.uk/api/projects/{id}/stories/{id}/comments/{id} 
+</p>
+<p>      3.
+   All users - http://url.co.uk/api/users
+</p>
+<p>      4.
+   An individual user - http://url.co.uk/api/users/{id}
+</p>
+<p> </p>
+<p><h2>POST
+   create requests</h2>
+</p>
+<p>A
+   successful POST request will return a 201 HTTP response code (Accepted), with
+   the posted content in the response body to confirm the object that has been
+   accepted, whilst an unsuccessful POST request will return the following
+   response codes; 403 Bad Request with an appropriate response message to guide
+   the user.
+</p>
+<p> </p>
+<p>1.   
+   Add a new project - http://url.co.uk/api/projects
+</p>
+<p>a.   
+   Add a story to project -
+   http://url.co.uk/api/projects/{id}/stories
+</p>
+<p>                                     
+   i.       
+   Add a comment to story -
+   http://url.co.uk/api/projects/{id}/stories/{id}/comments
+</p>
+<p>b.   
+   Add a bug to project -
+   http://url.co.uk/api/projects/{id}/bugs
+</p>
+<p>                                     
+   i.       
+   Add a comment to bug -
+   http://url.co.uk/api/projects/{id}/bugs/{id}/comments
+</p>
+<p>2.   
+   Add a new user - http://url.co.uk/api/user
+</p>
+<p> </p>
+<p> </p>
+<p><h2>POST update requests</h2></p>
+<p>A
+   successful POST update request will return a 204 HTTP response code (Resource
+   updated), whilst an unsuccessful POST update request will return the following
+   response codes; 404 Not found, 403 Bad Request with an appropriate response
+   message to guide the user.
+</p>
+<p> </p>
+<p>1.   
+   Update a new project - http://url.co.uk/api/projects
+</p>
+<p>a.   
+   Update a story to project -
+   http://url.co.uk/api/projects/{id}/stories
+</p>
+<p>b.   
+   Update a bug to project -
+   http://url.co.uk/api/projects/{id}/bugs
+</p>
+<p>2.   
+   Update a new user - http://url.co.uk/api/user
+</p>
+<p> </p>
+<p><h2>DELETE requests</h2></p>
+<p>A
+   successful DELETE request will return a 202 HTTP response code (Resource
+   deleted), with the posted content in the response body to confirm the object
+   that has been accepted, whilst an unsuccessful POST update request will return
+   the following response codes; 404 Not found, 403 Bad Request with an
+   appropriate response message to guide the user.
+</p>
+<p> </p>
+<p>1.   
+   Delete an individual project by id -
+   http://url.co.uk/api/projects/{id}
+</p>
+<p>a.   
+   Delete all stories for a project -
+   http://url.co.uk/api/projects/{id}/stories
+</p>
+<p>                                     
+   i.       
+   Delete all comments in story -
+   http://url.co.uk/api/projects/{id}/stories/{id}/comments
+</p>
+<p>                                    
+   ii.       
+   Delete an individual comment in story -
+   http://url.co.uk/api/projects/{id}/stories/{id}/comments/{id}
+</p>
+<p>b.   
+   Delete all bugs for a project -
+   http://url.co.uk/api/projects/{id}/bugs
+</p>
+<p>                                     
+   i.       
+   Delete all comments in bug -
+   http://url.co.uk/api/projects/{id}/bugs/{id}/comments
+</p>
+<p>                                    
+   ii.       
+   Delete an individual comment in bug -
+   http://url.co.uk/api/projects/{id}/stories/{id}/comments/{id}
+</p>
+<p>      2.
+   Delete an individual user - http://url.co.uk/api/users/{id}
+</p>
+<h2>Data Storage</h2>
+<p>The
+   data storage will be managed through the utilization of MongoDB
+   instead of using the conventional Entity Framework and MySQL dataset provided
+   through the Microsoft framework. The advantages of using MongoDB
+   are in the dataset format which stores data as BSON objects which are closely
+   related to the data types used within the C# language. This reduces the amount
+   of computational code required to query the desired data set for general
+   operations although this will require the conventional authentication attribute
+   classes to be custom made.
+</p>
+<h2>Testing</h2>
+<p>Both
+   the front-end of the development tracker and the API service will require a
+   good level of automation testing to prove the system throughout the
+   development. Both of these elements will use a different approach, with the API
+   service development taking a test-driven development and the web interface
+   being developed in a behaviour-driven development to pertain the progress of
+   development towards the user journey requirements.
+</p>
+</div>

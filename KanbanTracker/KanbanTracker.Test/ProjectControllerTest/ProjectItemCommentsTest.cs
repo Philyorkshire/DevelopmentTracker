@@ -104,7 +104,7 @@ namespace KanbanTracker.Test.ProjectControllerTest
                 Id = ObjectId.GenerateNewId().ToString(),
                 Created = DateTime.Now,
                 Description = "SUCCESSS!",
-                OwnerId = "1234567890"
+                OwnerId = "54a4d1d0d7aa0b1ae48da9f4"
             };
 
             var request = _controller.PostAProjectElementComment(projectId, "stories", story.Id, comment);

@@ -5,6 +5,17 @@
 
 @functions {
     public MongoCollection<Project> Open;
+
+    public static string WordLimit(string text)
+    {
+        if (text.Length > 70)
+        {
+            var output = text.Substring(0, Math.Min(text.Length, 70));
+            return output + "...";
+        }
+
+        return text;
+    }
 }
 
 @{
@@ -12,7 +23,6 @@
     var p = (Project) Open.FindOneById(ObjectId.Parse(@ViewBag.id));
     var s = p.Stories;
     var b = p.Bugs;
-
 
     var backlogCount = s.Count(i => i.Status == "backlog") + b.Count(i => i.Status == "backlog");
     var readyCount = s.Count(i => i.Status == "readytogo") + b.Count(i => i.Status == "readytogo");
@@ -22,20 +32,20 @@
     var completeCount = s.Count(i => i.Status == "complete") + b.Count(i => i.Status == "complete");
     var acceptedCount = s.Count(i => i.Status == "accepted") + b.Count(i => i.Status == "accepted");
 
-    var comments = new List<Comment>();
+    var commentList = new List<Comment>();
     var commentCount = 0;
     
     foreach (var bug in b)
     {
-        comments.AddRange(bug.Comments);
+        commentList.AddRange(bug.Comments);
     }
 
     foreach (var story in s)
     {
-        comments.AddRange(story.Comments);
+        commentList.AddRange(story.Comments);
     }
 
-    comments.OrderByDescending(d => d.Created);
+    var comments = commentList.OrderByDescending(d => d.Created);
 }
 
 <div class="content-wrapper">
@@ -51,7 +61,7 @@
     {
         <div class="backlog sections">
             <h4>(@backlogCount) Backlog</h4>
-            @if ("54a4d1d0d7aa0b1ae48da9f4" == KanbanTracker.Classes.User.CurrentUser.Id)
+            @if (true)
             {
                 foreach (var story in s)
                 {
@@ -61,7 +71,7 @@
                             <div class="card">
                                 <div class="story">Story</div>
                                 <a class="elementTitle" href="/projects/story_edit/@p.Id?storyId=@story.Id"><h5>@story.Title</h5></a>
-                                <p class="describe">@story.Description</p>
+                                <p class="describe">@WordLimit(@story.Description)</p>
                                 <div class="assigned">@KanbanTracker.Classes.User.GetUserFromId(@story.Assigned)</div>
                             </div>
                         </div>
@@ -76,7 +86,7 @@
                             <div class="card">
                                 <div class="bug">Bug</div>
                                 <a class="elementTitle" href="/projects/bug_edit/@p.Id?storyId=@bug.Id"><h5>@bug.Title</h5></a>
-                                <p class="describe">@bug.Description</p>
+                                <p class="describe">@WordLimit(@bug.Description)</p>
                                 <div class="assigned">@KanbanTracker.Classes.User.GetUserFromId(@bug.Assigned)</div>
                             </div>
                         </div>
@@ -87,7 +97,7 @@
 
         <div class="readytogo sections">
             <h4>(@readyCount) Ready to go</h4>
-            @if ("54a4d1d0d7aa0b1ae48da9f4" == KanbanTracker.Classes.User.CurrentUser.Id)
+            @if (true)
             {
                 foreach (var story in s)
                 {
@@ -97,7 +107,7 @@
                             <div class="card">
                                 <div class="story">Story</div>
                                 <a class="elementTitle" href="/projects/story_edit/@p.Id?storyId=@story.Id"><h5>@story.Title</h5></a>
-                                <p class="describe">@story.Description</p>
+                                <p class="describe">@WordLimit(@story.Description)</p>
                                 <div class="assigned">@KanbanTracker.Classes.User.GetUserFromId(@story.Assigned)</div>
                             </div>
                         </div>
@@ -112,7 +122,7 @@
                             <div class="card">
                                 <div class="bug">Bug</div>
                                 <a class="elementTitle" href="/projects/bug_edit/@p.Id?storyId=@bug.Id"><h5>@bug.Title</h5></a>
-                                <p class="describe">@bug.Description</p>
+                                <p class="describe">@WordLimit(@bug.Description)</p>
                                 <div class="assigned">@KanbanTracker.Classes.User.GetUserFromId(@bug.Assigned)</div>
                             </div>
                         </div>
@@ -123,7 +133,7 @@
 
         <div class="development sections">
             <h4>(@developmentCount) Development</h4>
-            @if ("54a4d1d0d7aa0b1ae48da9f4" == KanbanTracker.Classes.User.CurrentUser.Id)
+            @if (true)
             {
                 foreach (var story in s)
                 {
@@ -133,7 +143,7 @@
                             <div class="card">
                                 <div class="story">Story</div>
                                 <a class="elementTitle" href="/projects/story_edit/@p.Id?storyId=@story.Id"><h5>@story.Title</h5></a>
-                                <p class="describe">@story.Description</p>
+                                <p class="describe">@WordLimit(@story.Description)</p>
                                 <div class="assigned">@KanbanTracker.Classes.User.GetUserFromId(@story.Assigned)</div>
                             </div>
                         </div>
@@ -148,7 +158,7 @@
                             <div class="card">
                                 <div class="bug">Bug</div>
                                 <a class="elementTitle" href="/projects/bug_edit/@p.Id?storyId=@bug.Id"><h5>@bug.Title</h5></a>
-                                <p class="describe">@bug.Description</p>
+                                <p class="describe">@WordLimit(@bug.Description)</p>
                                 <div class="assigned">@KanbanTracker.Classes.User.GetUserFromId(@bug.Assigned)</div>
                             </div>
                         </div>
@@ -159,7 +169,7 @@
 
         <div class="codereview sections">
             <h4>(@codeCount) Code Review</h4>
-            @if ("54a4d1d0d7aa0b1ae48da9f4" == KanbanTracker.Classes.User.CurrentUser.Id)
+            @if (true)
             {
                 foreach (var story in s)
                 {
@@ -169,7 +179,7 @@
                             <div class="card">
                                 <div class="story">Story</div>
                                 <a class="elementTitle" href="/projects/story_edit/@p.Id?storyId=@story.Id"><h5>@story.Title</h5></a>
-                                <p class="describe">@story.Description</p>
+                                <p class="describe">@WordLimit(@story.Description)</p>
                                 <div class="assigned">@KanbanTracker.Classes.User.GetUserFromId(@story.Assigned)</div>
                             </div>
                         </div>
@@ -184,7 +194,7 @@
                             <div class="card">
                                 <div class="bug">Bug</div>
                                 <a class="elementTitle" href="/projects/bug_edit/@p.Id?storyId=@bug.Id"><h5>@bug.Title</h5></a>
-                                <p class="describe">@bug.Description</p>
+                                <p class="describe">@WordLimit(@bug.Description)</p>
                                 <div class="assigned">@KanbanTracker.Classes.User.GetUserFromId(@bug.Assigned)</div>
                             </div>
                         </div>
@@ -195,7 +205,7 @@
 
         <div class="testing sections">
             <h4>(@testingCount) Testing</h4>
-            @if ("54a4d1d0d7aa0b1ae48da9f4" == KanbanTracker.Classes.User.CurrentUser.Id)
+            @if (true)
             {
                 foreach (var story in s)
                 {
@@ -205,7 +215,7 @@
                             <div class="card">
                                 <div class="story">Story</div>
                                 <a class="elementTitle" href="/projects/story_edit/@p.Id?storyId=@story.Id"><h5>@story.Title</h5></a>
-                                <p class="describe">@story.Description</p>
+                                <p class="describe">@WordLimit(@story.Description)</p>
                                 <div class="assigned">@KanbanTracker.Classes.User.GetUserFromId(@story.Assigned)</div>
                             </div>
                         </div>
@@ -220,7 +230,7 @@
                             <div class="card">
                                 <div class="bug">Bug</div>
                                 <a class="elementTitle" href="/projects/bug_edit/@p.Id?storyId=@bug.Id"><h5>@bug.Title</h5></a>
-                                <p class="describe">@bug.Description</p>
+                                <p class="describe">@WordLimit(@bug.Description)</p>
                                 <div class="assigned">@KanbanTracker.Classes.User.GetUserFromId(@bug.Assigned)</div>
                             </div>
                         </div>
@@ -231,7 +241,7 @@
 
         <div class="complete sections">
             <h4>(@completeCount) Complete</h4>
-            @if ("54a4d1d0d7aa0b1ae48da9f4" == KanbanTracker.Classes.User.CurrentUser.Id)
+            @if (true)
             {
                 foreach (var story in s)
                 {
@@ -241,7 +251,7 @@
                             <div class="card">
                                 <div class="story">Story</div>
                                 <a class="elementTitle" href="/projects/story_edit/@p.Id?storyId=@story.Id"><h5>@story.Title</h5></a>
-                                <p class="describe">@story.Description</p>
+                                <p class="describe">@WordLimit(@story.Description)</p>
                                 <div class="assigned">@KanbanTracker.Classes.User.GetUserFromId(@story.Assigned)</div>
                             </div>
                         </div>
@@ -256,7 +266,7 @@
                             <div class="card">
                                 <div class="bug">Bug</div>
                                 <a class="elementTitle" href="/projects/bug_edit/@p.Id?storyId=@bug.Id"><h5>@bug.Title</h5></a>
-                                <p class="describe">@bug.Description</p>
+                                <p class="describe">@WordLimit(@bug.Description)</p>
                                 <div class="assigned">@KanbanTracker.Classes.User.GetUserFromId(@bug.Assigned)</div>
                             </div>
                         </div>
@@ -267,7 +277,7 @@
 
         <div class="accepted sections">
             <h4>(@acceptedCount) Accepted</h4>
-            @if ("54a4d1d0d7aa0b1ae48da9f4" == KanbanTracker.Classes.User.CurrentUser.Id)
+            @if (true)
             {
                 foreach (var story in s)
                 {
@@ -277,7 +287,7 @@
                             <div class="card">
                                 <div class="story">Story</div>
                                 <a class="elementTitle" href="/projects/story_edit/@p.Id?storyId=@story.Id"><h5>@story.Title</h5></a>
-                                <p class="describe">@story.Description</p>
+                                <p class="describe">@WordLimit(@story.Description)</p>
                                 <div class="assigned">@KanbanTracker.Classes.User.GetUserFromId(@story.Assigned)</div>
                             </div>
                         </div>
@@ -292,7 +302,7 @@
                             <div class="card">
                                 <div class="bug">Bug</div>
                                 <a class="elementTitle" href="/projects/bug_edit/@p.Id?storyId=@bug.Id"><h5>@bug.Title</h5></a>
-                                <p class="describe">@bug.Description</p>
+                                <p class="describe">@WordLimit(@bug.Description)</p>
                                 <div class="assigned">@KanbanTracker.Classes.User.GetUserFromId(@bug.Assigned)</div>
                             </div>
                         </div>

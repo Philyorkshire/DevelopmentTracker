@@ -97,6 +97,7 @@ namespace KanbanTracker.Controllers
 
             var comment = new Comment
             {
+                Id = ObjectId.GenerateNewId().ToString(),
                 Created = DateTime.Now,
                 Description = "",
                 OwnerId = Classes.User.CurrentUser.Id
@@ -147,6 +148,7 @@ namespace KanbanTracker.Controllers
 
             var comment = new Comment
             {
+                Id = ObjectId.GenerateNewId().ToString(),
                 Created = DateTime.Now,
                 Description = "",
                 OwnerId = Classes.User.CurrentUser.Id
@@ -197,6 +199,21 @@ namespace KanbanTracker.Controllers
                 _open.Update(query, update);
             }
             
+            return RedirectToAction("dashboard", "projects", new { id });
+        }
+
+        public RedirectToRouteResult Bug_Delete(string id, string bugId)
+        {
+            if (ModelState.IsValid)
+            {
+                var query = Query.And(Query.EQ("_id", ObjectId.Parse(id)));
+                var update = Update.Pull("Bugs", new BsonDocument{
+                             { "_id", ObjectId.Parse(bugId) }
+                });
+
+                _open.Update(query, update);
+            }
+
             return RedirectToAction("dashboard", "projects", new { id });
         }
 

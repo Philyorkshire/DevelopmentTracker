@@ -87,9 +87,10 @@ namespace KanbanTracker.Test.ProjectControllerTest
             var newBug = new Bug
             {
                 Id = ObjectId.GenerateNewId().ToString(),
+                Assigned = "54a4d1d0d7aa0b1ae48da9f4",
                 Title = "Unit Test - CreateANewBug()",
                 Description = "Created at ProjectBugsTest.cs",
-                Status = "In Progress",
+                Status = "backlog",
                 Created = DateTime.Now
             };
 

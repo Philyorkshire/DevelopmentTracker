@@ -87,10 +87,12 @@ namespace KanbanTracker.Test.ProjectControllerTest
             var newStory = new Story
             {
                 Id = ObjectId.GenerateNewId().ToString(),
+                Assigned = "54a4d1d0d7aa0b1ae48da9f4",
                 Title = "Unit Test - CreateANewStory()",
                 Description = "Created at ProjectStoriesTest.cs",
-                Status = "In Progress",
-                Created = DateTime.Now
+                Status = "development",
+                Created = DateTime.Now,
+                Comments = new List<Comment>()
             };
 
             var projectId = GetAProjectId();
