@@ -27,9 +27,12 @@ namespace KanbanTracker.Classes
         [BsonElement("_id")]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
+
         public string Description { get; set; }
+
         [BsonDateTimeOptions(Representation = BsonType.Document)]
         public DateTime Created { get; set; }
+
         public string OwnerId { get; set; }
     }
 }

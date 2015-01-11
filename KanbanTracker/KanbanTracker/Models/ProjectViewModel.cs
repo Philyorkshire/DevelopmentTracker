@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace KanbanTracker.Models
 {
-    public class ProjectViewModel 
+    public class ProjectViewModel
     {
         [Required]
         [Display(Name = "Title")]

@@ -43,12 +43,13 @@ namespace KanbanTracker.Controllers
 
         public HttpResponseMessage GetProjectById(string id)
         {
-            var story = _open.FindOneById(ObjectId.Parse(id));
-            return story != null ? Request.CreateResponse(HttpStatusCode.OK, story)
+            Project story = _open.FindOneById(ObjectId.Parse(id));
+            return story != null
+                ? Request.CreateResponse(HttpStatusCode.OK, story)
                 : Request.CreateErrorResponse(HttpStatusCode.NotFound, "Story could not be found");
         }
 
-        public HttpResponseMessage PostNewProject([FromBody]Project project)
+        public HttpResponseMessage PostNewProject([FromBody] Project project)
         {
             var newProject = new Project
             {
@@ -92,23 +93,25 @@ namespace KanbanTracker.Controllers
         [Route("api/project/{id}/stories")]
         public HttpResponseMessage GetAllProjectStories(string id)
         {
-            var project = _open.FindOneById(ObjectId.Parse(id));
-            return project != null ? Request.CreateResponse(HttpStatusCode.OK, project.Stories)
+            Project project = _open.FindOneById(ObjectId.Parse(id));
+            return project != null
+                ? Request.CreateResponse(HttpStatusCode.OK, project.Stories)
                 : Request.CreateErrorResponse(HttpStatusCode.NotFound, "Story could not be found");
         }
 
         [Route("api/project/{projectId}/stories/{storyId}")]
         public HttpResponseMessage GetAProjectStory(string projectId, string storyId)
         {
-            var project = _open.FindOneById(ObjectId.Parse(projectId));
-            var story = project.Stories.Find(s => s.Id == storyId);
+            Project project = _open.FindOneById(ObjectId.Parse(projectId));
+            Story story = project.Stories.Find(s => s.Id == storyId);
 
-            return story != null ? Request.CreateResponse(HttpStatusCode.OK, story)
+            return story != null
+                ? Request.CreateResponse(HttpStatusCode.OK, story)
                 : Request.CreateErrorResponse(HttpStatusCode.NotFound, "Story could not be found");
         }
 
         [Route("api/project/{id}/stories")]
-        public HttpResponseMessage PostProjectStory(string id, [FromBody]Story story)
+        public HttpResponseMessage PostProjectStory(string id, [FromBody] Story story)
         {
             var newStory = new Story
             {
@@ -136,10 +139,11 @@ namespace KanbanTracker.Controllers
         [Route("api/project/{projectId}/stories/{storyId}")]
         public HttpResponseMessage DeleteAProjectStory(string projectId, string storyId)
         {
-            var query = Query.And(Query.EQ("_id", ObjectId.Parse(projectId)));
-            var update = Update.Pull("Stories", new BsonDocument{
-                             { "_id", ObjectId.Parse(storyId) }
-                });
+            IMongoQuery query = Query.And(Query.EQ("_id", ObjectId.Parse(projectId)));
+            UpdateBuilder update = Update.Pull("Stories", new BsonDocument
+            {
+                {"_id", ObjectId.Parse(storyId)}
+            });
 
             try
             {
@@ -158,29 +162,32 @@ namespace KanbanTracker.Controllers
         [Route("api/project/{projectId}/bugs")]
         public HttpResponseMessage GetAllProjectBugs(string projectId)
         {
-            var project = _open.FindOneById(ObjectId.Parse(projectId));
-            return project != null ? Request.CreateResponse(HttpStatusCode.OK, project.Bugs)
+            Project project = _open.FindOneById(ObjectId.Parse(projectId));
+            return project != null
+                ? Request.CreateResponse(HttpStatusCode.OK, project.Bugs)
                 : Request.CreateErrorResponse(HttpStatusCode.NotFound, "Bugs could not be found");
         }
 
         [Route("api/project/{projectId}/bugs/{bugId}")]
         public HttpResponseMessage GetAProjectBug(string projectId, string bugId)
         {
-            var project = _open.FindOneById(ObjectId.Parse(projectId));
-            var bugs = project.Bugs.Find(b => b.Id == bugId);
+            Project project = _open.FindOneById(ObjectId.Parse(projectId));
+            Bug bugs = project.Bugs.Find(b => b.Id == bugId);
 
-            return bugs != null ? Request.CreateResponse(HttpStatusCode.OK, bugs)
+            return bugs != null
+                ? Request.CreateResponse(HttpStatusCode.OK, bugs)
                 : Request.CreateErrorResponse(HttpStatusCode.NotFound, "Bug could not be found");
         }
 
         [Route("api/project/{projectId}/bugs/{bugId}")]
         public HttpResponseMessage DeleteAProjectBug(string projectId, string bugId)
         {
-            var query = Query.And(Query.EQ("_id", ObjectId.Parse(projectId)));
+            IMongoQuery query = Query.And(Query.EQ("_id", ObjectId.Parse(projectId)));
 
-            var update = Update.Pull("Bugs", new BsonDocument{
-                             { "_id", ObjectId.Parse(bugId) }
-                });
+            UpdateBuilder update = Update.Pull("Bugs", new BsonDocument
+            {
+                {"_id", ObjectId.Parse(bugId)}
+            });
 
             try
             {
@@ -195,7 +202,7 @@ namespace KanbanTracker.Controllers
         }
 
         [Route("api/project/{projectId}/bugs")]
-        public HttpResponseMessage PostANewProjectBug(string projectId, [FromBody]Bug bug)
+        public HttpResponseMessage PostANewProjectBug(string projectId, [FromBody] Bug bug)
         {
             var newBug = new Bug
             {
@@ -226,21 +233,22 @@ namespace KanbanTracker.Controllers
         [Route("api/project/{projectId}/{task}/{elementId}/comments")]
         public HttpResponseMessage GetAllProjectElementComments(string projectId, string task, string elementId)
         {
-            var project = _open.FindOneById(ObjectId.Parse(projectId));
+            Project project = _open.FindOneById(ObjectId.Parse(projectId));
 
             if (task == "bugs")
             {
-                var bug = project.Bugs.Find(b => b.Id == elementId);
-                var comments = bug.Comments;
+                Bug bug = project.Bugs.Find(b => b.Id == elementId);
+                List<Comment> comments = bug.Comments;
 
-                return comments != null ? Request.CreateResponse(HttpStatusCode.OK, comments)
+                return comments != null
+                    ? Request.CreateResponse(HttpStatusCode.OK, comments)
                     : Request.CreateErrorResponse(HttpStatusCode.NotFound, "Comment could not be found");
             }
-            
+
             if (task == "stories")
             {
-                var story = project.Stories.Find(s => s.Id == elementId);
-                var comments = story.Comments;
+                Story story = project.Stories.Find(s => s.Id == elementId);
+                List<Comment> comments = story.Comments;
 
                 return comments != null
                     ? Request.CreateResponse(HttpStatusCode.OK, comments)
@@ -251,25 +259,28 @@ namespace KanbanTracker.Controllers
         }
 
         [Route("api/project/{projectId}/{task}/{elementId}/comments/{commentId}")]
-        public HttpResponseMessage GetAProjectElementComment(string projectId, string task, string elementId, string commentId)
+        public HttpResponseMessage GetAProjectElementComment(string projectId, string task, string elementId,
+            string commentId)
         {
-            var project = _open.FindOneById(ObjectId.Parse(projectId));
+            Project project = _open.FindOneById(ObjectId.Parse(projectId));
 
             if (task == "bugs")
             {
-                var bug = project.Bugs.Find(b => b.Id == elementId);
-                var comment = bug.Comments.Find(c => c.Id == commentId);
+                Bug bug = project.Bugs.Find(b => b.Id == elementId);
+                Comment comment = bug.Comments.Find(c => c.Id == commentId);
 
-                return comment != null ? Request.CreateResponse(HttpStatusCode.OK, comment)
+                return comment != null
+                    ? Request.CreateResponse(HttpStatusCode.OK, comment)
                     : Request.CreateErrorResponse(HttpStatusCode.NotFound, "Comment could not be found");
             }
 
             if (task == "stories")
             {
-                var story = project.Stories.Find(s => s.Id == elementId);
-                var comment = story.Comments.Find(c => c.Id == commentId);
+                Story story = project.Stories.Find(s => s.Id == elementId);
+                Comment comment = story.Comments.Find(c => c.Id == commentId);
 
-                return comment != null ? Request.CreateResponse(HttpStatusCode.OK, comment)
+                return comment != null
+                    ? Request.CreateResponse(HttpStatusCode.OK, comment)
                     : Request.CreateErrorResponse(HttpStatusCode.NotFound, "Comment could not be found");
             }
 
@@ -277,9 +288,10 @@ namespace KanbanTracker.Controllers
         }
 
         [Route("api/project/{projectId}/{task}/{elementId}/comments")]
-        public HttpResponseMessage PostAProjectElementComment(string projectId, string task, string elementId, [FromBody] Comment comment)
+        public HttpResponseMessage PostAProjectElementComment(string projectId, string task, string elementId,
+            [FromBody] Comment comment)
         {
-            var project = _open.FindOneById(ObjectId.Parse(projectId));
+            Project project = _open.FindOneById(ObjectId.Parse(projectId));
 
             var nComment = new Comment
             {
@@ -292,20 +304,21 @@ namespace KanbanTracker.Controllers
 
             if (task == "bugs")
             {
-                var bug = project.Bugs.Find(b => b.Id == elementId);
-                var comments = bug.Comments;
+                Bug bug = project.Bugs.Find(b => b.Id == elementId);
+                List<Comment> comments = bug.Comments;
 
                 comments.Add(nComment);
                 _open.Save(project);
 
-                return comments != null ? Request.CreateResponse(HttpStatusCode.Accepted, comments)
+                return comments != null
+                    ? Request.CreateResponse(HttpStatusCode.Accepted, comments)
                     : Request.CreateErrorResponse(HttpStatusCode.NotFound, "Comment could not be created");
             }
 
             if (task == "stories")
             {
-                var story = project.Stories.Find(s => s.Id == elementId);
-                var comments = story.Comments;
+                Story story = project.Stories.Find(s => s.Id == elementId);
+                List<Comment> comments = story.Comments;
 
                 comments.Add(nComment);
                 _open.Save(project);
@@ -319,14 +332,16 @@ namespace KanbanTracker.Controllers
         }
 
         [Route("api/project/{projectId}/{task}/{elementId}/comments/{commentId}")]
-        public HttpResponseMessage DeleteAProjectElementComments(string projectId, string task, string elementId, string commentId)
+        public HttpResponseMessage DeleteAProjectElementComments(string projectId, string task, string elementId,
+            string commentId)
         {
-            var query = Query.And(Query.EQ("_id", ObjectId.Parse(projectId)));
+            IMongoQuery query = Query.And(Query.EQ("_id", ObjectId.Parse(projectId)));
 
             if (task == "bugs")
             {
-                var update = Update.Pull("Bug.Comment", new BsonDocument{
-                             { "_id", ObjectId.Parse(commentId) }
+                UpdateBuilder update = Update.Pull("Bug.Comment", new BsonDocument
+                {
+                    {"_id", ObjectId.Parse(commentId)}
                 });
 
                 try
@@ -343,8 +358,9 @@ namespace KanbanTracker.Controllers
 
             if (task == "stories")
             {
-                var update = Update.Pull("Story.Comment", new BsonDocument{
-                             { "_id", ObjectId.Parse(commentId) }
+                UpdateBuilder update = Update.Pull("Story.Comment", new BsonDocument
+                {
+                    {"_id", ObjectId.Parse(commentId)}
                 });
 
                 try

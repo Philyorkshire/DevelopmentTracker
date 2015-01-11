@@ -19,7 +19,7 @@ using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace KanbanTracker.Classes 
+namespace KanbanTracker.Classes
 {
     public abstract class Task
     {
@@ -28,6 +28,7 @@ namespace KanbanTracker.Classes
         [BsonElement("_id")]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
+
         public string Title { get; set; }
         public string Description { get; set; }
         public string Status { get; set; }
@@ -39,6 +40,6 @@ namespace KanbanTracker.Classes
         [BsonDateTimeOptions(Representation = BsonType.Document)]
         public DateTime Created { get; set; }
 
-        public List<Comment> Comments { get; set; } 
+        public List<Comment> Comments { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace KanbanTracker.Models
 
         [Required]
         [Display(Name = "ProjectId")]
-        public string ProjectId { get; set; } 
+        public string ProjectId { get; set; }
 
         [Required]
         [Display(Name = "ElementId")]

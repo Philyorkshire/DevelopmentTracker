@@ -1,39 +1,39 @@
-﻿@using KanbanTracker.Classes
+﻿@using KanbanTracker.Account
 <header>
-        <div class="float-left">
-            <p class="site-title">
-                <a href="~/">Development Tracker</a></p>
-        </div>
-        @{
-            if (Auth.Authenticated)
-            {
-                <div class="nav">
-                    <div class="drop">
+    <div class="float-left">
+        <p class="site-title">
+            <a href="~/">Development Tracker</a></p>
+    </div>
+    @{
+        if (Auth.Authenticated)
+        {
+            <div class="nav">
+                <div class="drop">
                     <ul class="drop_menu">
-                    <li><a href='#'>@KanbanTracker.Classes.User.CurrentUser.UserName</a>
-                        <ul>
-                            <li><a href="@Url.Action("index", "projects")">Projects</a></li>
-                            <li><a href="@Url.Action("logout", "account")">Logout</a></li>
-                        </ul>
-                    </li>
+                        <li><a href='#'>@KanbanTracker.Account.User.CurrentUser.UserName</a>
+                            <ul>
+                                <li><a href="@Url.Action("index", "projects")">Projects</a></li>
+                                <li><a href="@Url.Action("logout", "account")">Logout</a></li>
+                            </ul>
+                        </li>
                         <li><a href="@Url.Action("create", "projects")">Create Project</a></li>
                         <li><a href="@Url.Action("wiki", "home")">Wiki</a></li>
                     </ul>
-                    </div>
                 </div>
-            }
+            </div>
+        }
 
-            else
-            {
-                <div class="nav">
-                    <div class="drop">
+        else
+        {
+            <div class="nav">
+                <div class="drop">
                     <ul class="drop_menu">
-                    <li><a href="@Url.Action("login", "account")">Login</a></li>
+                        <li><a href="@Url.Action("login", "account")">Login</a></li>
                         <li><a href="@Url.Action("register", "account")">Register</a></li>
                         <li><a href="@Url.Action("wiki", "home")">Wiki</a></li>
                     </ul>
-                    </div>
                 </div>
-            }
+            </div>
         }
+    }
 </header>

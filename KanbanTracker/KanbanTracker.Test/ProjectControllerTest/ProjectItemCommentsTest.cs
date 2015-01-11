@@ -38,7 +38,7 @@ namespace KanbanTracker.Test.ProjectControllerTest
         public ProjectItemCommentsTest()
         {
             _open = ProjectDb.Open();
-            _controller = new ProjectController { Request = new HttpRequestMessage() };
+            _controller = new ProjectController {Request = new HttpRequestMessage()};
             _controller.Request.SetConfiguration(new HttpConfiguration());
         }
 
@@ -83,7 +83,7 @@ namespace KanbanTracker.Test.ProjectControllerTest
 
             var response = responseStory.Count;
 
-            Assert.IsNotNull(response); 
+            Assert.IsNotNull(response);
             Assert.AreEqual(commentCount, response);
         }
 
@@ -129,7 +129,6 @@ namespace KanbanTracker.Test.ProjectControllerTest
             request.TryGetContentValue(out responseComment);
 
             Assert.AreEqual(HttpStatusCode.Accepted, request.StatusCode);
-
         }
     }
 }

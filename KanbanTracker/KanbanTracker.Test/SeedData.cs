@@ -82,7 +82,6 @@ namespace KanbanTracker.Test
                             {
                                 "unitTests"
                             },
-
                             Comments = new List<Comment>
                             {
                                 new Comment
@@ -95,7 +94,6 @@ namespace KanbanTracker.Test
                             }
                         }
                     },
-
                     Bugs = new List<Bug>
                     {
                         new Bug
@@ -110,7 +108,6 @@ namespace KanbanTracker.Test
                             {
                                 "unitTests"
                             },
-
                             Comments = new List<Comment>
                             {
                                 new Comment
@@ -123,10 +120,7 @@ namespace KanbanTracker.Test
                             }
                         }
                     }
-
-                    
                 },
-
                 new Project
                 {
                     Id = GenerateId(),
@@ -149,7 +143,6 @@ namespace KanbanTracker.Test
                             {
                                 "unitTests"
                             },
-
                             Comments = new List<Comment>
                             {
                                 new Comment
@@ -160,10 +153,8 @@ namespace KanbanTracker.Test
                                     OwnerId = "54a4d1d0d7aa0b1ae48da9f4"
                                 }
                             }
-
                         }
                     },
-
                     Bugs = new List<Bug>
                     {
                         new Bug
@@ -178,7 +169,6 @@ namespace KanbanTracker.Test
                             {
                                 "unitTests"
                             },
-
                             Comments = new List<Comment>
                             {
                                 new Comment
@@ -192,7 +182,6 @@ namespace KanbanTracker.Test
                         }
                     }
                 },
-
                 new Project
                 {
                     Id = GenerateId(),
@@ -215,7 +204,6 @@ namespace KanbanTracker.Test
                             {
                                 "unitTests"
                             },
-
                             Comments = new List<Comment>
                             {
                                 new Comment
@@ -226,10 +214,8 @@ namespace KanbanTracker.Test
                                     OwnerId = "54a4d1d0d7aa0b1ae48da9f4"
                                 }
                             }
-
                         }
                     },
-
                     Bugs = new List<Bug>
                     {
                         new Bug
@@ -244,7 +230,6 @@ namespace KanbanTracker.Test
                             {
                                 "unitTests"
                             },
-
                             Comments = new List<Comment>
                             {
                                 new Comment

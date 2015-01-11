@@ -20,15 +20,15 @@ using MongoDB.Driver;
 namespace KanbanTracker.Models
 {
     /// <summary>
-    /// Change the MongoClient location depending on the install of MongoDb - default used here.
+    ///     Change the MongoClient location depending on the install of MongoDb - default used here.
     /// </summary>
     public class ProjectDb
     {
         public static MongoCollection<Project> Open()
         {
             var client = new MongoClient("mongodb://localhost");
-            var server = client.GetServer();
-            var db = server.GetDatabase("ProjectDb");
+            MongoServer server = client.GetServer();
+            MongoDatabase db = server.GetDatabase("ProjectDb");
             return db.GetCollection<Project>("Projects");
         }
     }

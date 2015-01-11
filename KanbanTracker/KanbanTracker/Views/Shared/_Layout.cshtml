@@ -1,22 +1,22 @@
-﻿@using KanbanTracker.Classes
+﻿@using KanbanTracker.Account
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
-    <link href='http://fonts.googleapis.com/css?family=Arimo|Oswald:300' rel='stylesheet' type='text/css'>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-</head>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>@ViewBag.Title</title>
+        <link href='http://fonts.googleapis.com/css?family=Arimo|Oswald:300' rel='stylesheet' type='text/css'>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+    </head>
     <body>
         @Html.Partial("Header")
         <div class="content-wrapper"><p class="info-message">@ViewBag.Info</p><h4>@Auth.Message</h4></div>
 
-            @RenderBody()
+        @RenderBody()
 
         @Scripts.Render("~/bundles/jquery")
-        @RenderSection("scripts", required: false)
+        @RenderSection("scripts", false)
             
         
     

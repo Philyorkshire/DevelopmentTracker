@@ -38,7 +38,7 @@ namespace KanbanTracker.Test.ProjectControllerTest
         public ProjectItemTest()
         {
             _open = ProjectDb.Open();
-            controller = new ProjectController { Request = new HttpRequestMessage() };
+            controller = new ProjectController {Request = new HttpRequestMessage()};
             controller.Request.SetConfiguration(new HttpConfiguration());
         }
 

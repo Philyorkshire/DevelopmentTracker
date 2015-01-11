@@ -1,4 +1,4 @@
-﻿@using System.Collections
+﻿@using KanbanTracker.Account
 @using KanbanTracker.Classes
 @using KanbanTracker.Models
 @using MongoDB.Bson
@@ -14,9 +14,9 @@
     Open = UserDb.Open();
     ProjectOpen = ProjectDb.Open();
     var individualProject = (Project) ProjectOpen.FindOneById(ObjectId.Parse(@ViewBag.id));
-    var bug = individualProject.Bugs.Find(s => s.Id == @ViewBag.bugId);
-    var comments = bug.Comments.OrderByDescending(d => d.Created);
-    var commentCount = 0;
+    Bug bug = individualProject.Bugs.Find(s => s.Id == @ViewBag.bugId);
+    IOrderedEnumerable<Comment> comments = bug.Comments.OrderByDescending(d => d.Created);
+    int commentCount = 0;
 }
 
 <div id="body">
@@ -25,37 +25,37 @@
             <hgroup class="title">
                 <h1>@bug.Title</h1>
             </hgroup>
-            @using (Html.BeginForm("bug_Edit", "Projects", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            @using (Html.BeginForm("bug_Edit", "Projects", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
             {
                 @Html.AntiForgeryToken()
-                @Html.ValidationSummary("", new { @class = "text-danger" })
+                @Html.ValidationSummary("", new {@class = "text-danger"})
 
                 <div class="form-group">
                     <div class="col-md-10">
                         <textarea class="form-control description" data-val="true" data-val-required="The Description field is required." id="Description" name="Description">@bug.Description</textarea>
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <div class="col-md-10">
                         <input class="form-control" data-val="true" data-val-required="The Title field is required." id="Id" name="Id" value="@bug.Id" type="hidden"/>
                         <input class="form-control" data-val="true" data-val-required="The Title field is required." id="ProjectId" name="ProjectId" value="@individualProject.Id" type="hidden"/> 
                     </div>
                 </div>
-                
+
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Assigned, new { @class = "col-md-2 control-label" })
+                    @Html.LabelFor(m => m.Assigned, new {@class = "col-md-2 control-label"})
                     <div class="col-md-10">
                         <select name="Assigned">
-                            <option value="@bug.Assigned" selected="selected">@KanbanTracker.Classes.User.GetUserFromId(@bug.Assigned)</option>
-                            @foreach (var user in Open.FindAll())
+                            <option value="@bug.Assigned" selected="selected">@KanbanTracker.Account.User.GetUserFromId(@bug.Assigned)</option>
+                            @foreach (User user in Open.FindAll())
                             {
                                 <option value="@user.Id">@user.UserName</option>
                             }
                         </select>
                     </div>
                 </div>
-        
+
                 <div class="form-group">
                     <label class="col-md-2 control-label" for="Status">Status</label>
                     <div class="col-md-10">
@@ -77,21 +77,19 @@
                         <input type="submit" class="btn btn-default" value="Update bug" />
                     </div>
                 </div>
-                
-                
             }<a href="/projects/bug_delete/@individualProject.Id?bugId=@bug.Id">Delete bug</a>
         
             <h2>Comments</h2>
             <hr/>
             
 
-            @foreach (var comment in comments)
+            @foreach (Comment comment in comments)
             {
                 if (commentCount%2 == 0)
                 {
                     <div class="evenComment">
                         <p>@comment.Created, @comment.Description</p>
-                        <sup>@KanbanTracker.Classes.User.GetUserFromId(@comment.OwnerId)</sup>
+                        <sup>@KanbanTracker.Account.User.GetUserFromId(@comment.OwnerId)</sup>
                     </div>
                 }
 
@@ -99,24 +97,24 @@
                 {
                     <div class="oddComment">
                         <p>@comment.Created, @comment.Description</p>
-                        <sup>@KanbanTracker.Classes.User.GetUserFromId(@comment.OwnerId)</sup>
+                        <sup>@KanbanTracker.Account.User.GetUserFromId(@comment.OwnerId)</sup>
                     </div>
                 }
 
                 commentCount++;
             }
             
-            @using (Html.BeginForm("Comment_Create", "Projects", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            @using (Html.BeginForm("Comment_Create", "Projects", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
             {
                 @Html.AntiForgeryToken()
-                @Html.ValidationSummary("", new { @class = "text-danger" })
+                @Html.ValidationSummary("", new {@class = "text-danger"})
 
                 <div class="form-group">
                     <div class="col-md-10">
                         <textarea class="form-control" data-val="true" data-val-required="The Description field is required." id="Description" name="Description"></textarea>
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <div class="col-md-10">
                         <input class="form-control" data-val="true" id="ElementId" name="ElementId" value="@bug.Id" type="hidden"/>
@@ -124,7 +122,7 @@
                         <input class="form-control" data-val="true" id="ElementType" name="ElementType" value="bug" type="hidden"/> 
                     </div>
                 </div>
-                
+
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
@@ -137,4 +135,3 @@
     </section>
     
 </div>
-

@@ -18,20 +18,21 @@ using KanbanTracker.Models;
 using MongoDB.AspNet.Identity;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Driver;
 
-namespace KanbanTracker.Classes
+namespace KanbanTracker.Account
 {
     public class User : IdentityUser
     {
+        public static User CurrentUser;
+
         [BsonRepresentation(BsonType.ObjectId)]
         public virtual string SessionId { get; set; }
 
-        public static User CurrentUser;
-
         public static string GetUserFromId(string id)
         {
-            var open = UserDb.Open();
-            var user = open.FindOneById(ObjectId.Parse(id));
+            MongoCollection<User> open = UserDb.Open();
+            User user = open.FindOneById(ObjectId.Parse(id));
             return user.UserName;
         }
     }

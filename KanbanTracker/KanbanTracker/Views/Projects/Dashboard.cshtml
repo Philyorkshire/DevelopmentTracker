@@ -2,52 +2,52 @@
 @using KanbanTracker.Models
 @using MongoDB.Bson
 @using MongoDB.Driver
-
 @functions {
     public MongoCollection<Project> Open;
 
     public static string WordLimit(string text)
     {
         if (text.Length <= 70) return text;
-        var output = text.Substring(0, Math.Min(text.Length, 70));
+        string output = text.Substring(0, Math.Min(text.Length, 70));
         return output + "...";
     }
+
 }
 
 @{
     Open = ProjectDb.Open();
     var p = (Project) Open.FindOneById(ObjectId.Parse(@ViewBag.id));
-    var s = p.Stories;
-    var b = p.Bugs;
+    List<Story> s = p.Stories;
+    List<Bug> b = p.Bugs;
 
-    var backlogCount = s.Count(i => i.Status == "backlog") + b.Count(i => i.Status == "backlog");
-    var readyCount = s.Count(i => i.Status == "readytogo") + b.Count(i => i.Status == "readytogo");
-    var developmentCount = s.Count(i => i.Status == "development") + b.Count(i => i.Status == "development");
-    var codeCount = s.Count(i => i.Status == "codereview") + b.Count(i => i.Status == "codereview");
-    var testingCount = s.Count(i => i.Status == "testing") + b.Count(i => i.Status == "testing");
-    var completeCount = s.Count(i => i.Status == "complete") + b.Count(i => i.Status == "complete");
-    var acceptedCount = s.Count(i => i.Status == "accepted") + b.Count(i => i.Status == "accepted");
+    int backlogCount = s.Count(i => i.Status == "backlog") + b.Count(i => i.Status == "backlog");
+    int readyCount = s.Count(i => i.Status == "readytogo") + b.Count(i => i.Status == "readytogo");
+    int developmentCount = s.Count(i => i.Status == "development") + b.Count(i => i.Status == "development");
+    int codeCount = s.Count(i => i.Status == "codereview") + b.Count(i => i.Status == "codereview");
+    int testingCount = s.Count(i => i.Status == "testing") + b.Count(i => i.Status == "testing");
+    int completeCount = s.Count(i => i.Status == "complete") + b.Count(i => i.Status == "complete");
+    int acceptedCount = s.Count(i => i.Status == "accepted") + b.Count(i => i.Status == "accepted");
 
     var commentList = new List<Comment>();
-    var commentCount = 0;
-    
-    foreach (var bug in b)
+    int commentCount = 0;
+
+    foreach (Bug bug in b)
     {
         commentList.AddRange(bug.Comments);
     }
 
-    foreach (var story in s)
+    foreach (Story story in s)
     {
         commentList.AddRange(story.Comments);
     }
 
-    var comments = commentList.OrderByDescending(d => d.Created);
+    IOrderedEnumerable<Comment> comments = commentList.OrderByDescending(d => d.Created);
 }
 
 <div class="content-wrapper">
     <h1>@p.Title</h1>
     <p>Description: @p.Description</p>
-    <p>Creator: @KanbanTracker.Classes.User.GetUserFromId(@p.Owner)</p>
+    <p>Creator: @KanbanTracker.Account.User.GetUserFromId(@p.Owner)</p>
     <p>Due Date: @p.DueDate</p>
 </div>
 
@@ -59,7 +59,7 @@
             <h4>(@backlogCount) Backlog</h4>
             @if (true)
             {
-                foreach (var story in s)
+                foreach (Story story in s)
                 {
                     if (story.Status == "backlog")
                     {
@@ -68,13 +68,13 @@
                                 <div class="story">Story</div>
                                 <a class="elementTitle" href="/projects/story_edit/@p.Id?storyId=@story.Id"><h5>@story.Title</h5></a>
                                 <p class="describe">@WordLimit(@story.Description)</p>
-                                <div class="assigned">@KanbanTracker.Classes.User.GetUserFromId(@story.Assigned)</div>
+                                <div class="assigned">@KanbanTracker.Account.User.GetUserFromId(@story.Assigned)</div>
                             </div>
                         </div>
                     }
                 }
-                
-                foreach (var bug in b)
+
+                foreach (Bug bug in b)
                 {
                     if (bug.Status == "backlog")
                     {
@@ -83,7 +83,7 @@
                                 <div class="bug">Bug</div>
                                 <a class="elementTitle" href="/projects/bug_edit/@p.Id?storyId=@bug.Id"><h5>@bug.Title</h5></a>
                                 <p class="describe">@WordLimit(@bug.Description)</p>
-                                <div class="assigned">@KanbanTracker.Classes.User.GetUserFromId(@bug.Assigned)</div>
+                                <div class="assigned">@KanbanTracker.Account.User.GetUserFromId(@bug.Assigned)</div>
                             </div>
                         </div>
                     }
@@ -95,7 +95,7 @@
             <h4>(@readyCount) Ready to go</h4>
             @if (true)
             {
-                foreach (var story in s)
+                foreach (Story story in s)
                 {
                     if (story.Status == "readytogo")
                     {
@@ -104,13 +104,13 @@
                                 <div class="story">Story</div>
                                 <a class="elementTitle" href="/projects/story_edit/@p.Id?storyId=@story.Id"><h5>@story.Title</h5></a>
                                 <p class="describe">@WordLimit(@story.Description)</p>
-                                <div class="assigned">@KanbanTracker.Classes.User.GetUserFromId(@story.Assigned)</div>
+                                <div class="assigned">@KanbanTracker.Account.User.GetUserFromId(@story.Assigned)</div>
                             </div>
                         </div>
                     }
                 }
-                
-                foreach (var bug in b)
+
+                foreach (Bug bug in b)
                 {
                     if (bug.Status == "readytogo")
                     {
@@ -119,7 +119,7 @@
                                 <div class="bug">Bug</div>
                                 <a class="elementTitle" href="/projects/bug_edit/@p.Id?storyId=@bug.Id"><h5>@bug.Title</h5></a>
                                 <p class="describe">@WordLimit(@bug.Description)</p>
-                                <div class="assigned">@KanbanTracker.Classes.User.GetUserFromId(@bug.Assigned)</div>
+                                <div class="assigned">@KanbanTracker.Account.User.GetUserFromId(@bug.Assigned)</div>
                             </div>
                         </div>
                     }
@@ -131,7 +131,7 @@
             <h4>(@developmentCount) Development</h4>
             @if (true)
             {
-                foreach (var story in s)
+                foreach (Story story in s)
                 {
                     if (story.Status == "development")
                     {
@@ -140,13 +140,13 @@
                                 <div class="story">Story</div>
                                 <a class="elementTitle" href="/projects/story_edit/@p.Id?storyId=@story.Id"><h5>@story.Title</h5></a>
                                 <p class="describe">@WordLimit(@story.Description)</p>
-                                <div class="assigned">@KanbanTracker.Classes.User.GetUserFromId(@story.Assigned)</div>
+                                <div class="assigned">@KanbanTracker.Account.User.GetUserFromId(@story.Assigned)</div>
                             </div>
                         </div>
                     }
                 }
-                
-                foreach (var bug in b)
+
+                foreach (Bug bug in b)
                 {
                     if (bug.Status == "development")
                     {
@@ -155,7 +155,7 @@
                                 <div class="bug">Bug</div>
                                 <a class="elementTitle" href="/projects/bug_edit/@p.Id?storyId=@bug.Id"><h5>@bug.Title</h5></a>
                                 <p class="describe">@WordLimit(@bug.Description)</p>
-                                <div class="assigned">@KanbanTracker.Classes.User.GetUserFromId(@bug.Assigned)</div>
+                                <div class="assigned">@KanbanTracker.Account.User.GetUserFromId(@bug.Assigned)</div>
                             </div>
                         </div>
                     }
@@ -167,7 +167,7 @@
             <h4>(@codeCount) Code Review</h4>
             @if (true)
             {
-                foreach (var story in s)
+                foreach (Story story in s)
                 {
                     if (story.Status == "codereview")
                     {
@@ -176,13 +176,13 @@
                                 <div class="story">Story</div>
                                 <a class="elementTitle" href="/projects/story_edit/@p.Id?storyId=@story.Id"><h5>@story.Title</h5></a>
                                 <p class="describe">@WordLimit(@story.Description)</p>
-                                <div class="assigned">@KanbanTracker.Classes.User.GetUserFromId(@story.Assigned)</div>
+                                <div class="assigned">@KanbanTracker.Account.User.GetUserFromId(@story.Assigned)</div>
                             </div>
                         </div>
                     }
                 }
-                
-                foreach (var bug in b)
+
+                foreach (Bug bug in b)
                 {
                     if (bug.Status == "codereview")
                     {
@@ -191,7 +191,7 @@
                                 <div class="bug">Bug</div>
                                 <a class="elementTitle" href="/projects/bug_edit/@p.Id?storyId=@bug.Id"><h5>@bug.Title</h5></a>
                                 <p class="describe">@WordLimit(@bug.Description)</p>
-                                <div class="assigned">@KanbanTracker.Classes.User.GetUserFromId(@bug.Assigned)</div>
+                                <div class="assigned">@KanbanTracker.Account.User.GetUserFromId(@bug.Assigned)</div>
                             </div>
                         </div>
                     }
@@ -203,7 +203,7 @@
             <h4>(@testingCount) Testing</h4>
             @if (true)
             {
-                foreach (var story in s)
+                foreach (Story story in s)
                 {
                     if (story.Status == "testing")
                     {
@@ -212,13 +212,13 @@
                                 <div class="story">Story</div>
                                 <a class="elementTitle" href="/projects/story_edit/@p.Id?storyId=@story.Id"><h5>@story.Title</h5></a>
                                 <p class="describe">@WordLimit(@story.Description)</p>
-                                <div class="assigned">@KanbanTracker.Classes.User.GetUserFromId(@story.Assigned)</div>
+                                <div class="assigned">@KanbanTracker.Account.User.GetUserFromId(@story.Assigned)</div>
                             </div>
                         </div>
                     }
                 }
-                
-                foreach (var bug in b)
+
+                foreach (Bug bug in b)
                 {
                     if (bug.Status == "testing")
                     {
@@ -227,7 +227,7 @@
                                 <div class="bug">Bug</div>
                                 <a class="elementTitle" href="/projects/bug_edit/@p.Id?storyId=@bug.Id"><h5>@bug.Title</h5></a>
                                 <p class="describe">@WordLimit(@bug.Description)</p>
-                                <div class="assigned">@KanbanTracker.Classes.User.GetUserFromId(@bug.Assigned)</div>
+                                <div class="assigned">@KanbanTracker.Account.User.GetUserFromId(@bug.Assigned)</div>
                             </div>
                         </div>
                     }
@@ -239,7 +239,7 @@
             <h4>(@completeCount) Complete</h4>
             @if (true)
             {
-                foreach (var story in s)
+                foreach (Story story in s)
                 {
                     if (story.Status == "complete")
                     {
@@ -248,13 +248,13 @@
                                 <div class="story">Story</div>
                                 <a class="elementTitle" href="/projects/story_edit/@p.Id?storyId=@story.Id"><h5>@story.Title</h5></a>
                                 <p class="describe">@WordLimit(@story.Description)</p>
-                                <div class="assigned">@KanbanTracker.Classes.User.GetUserFromId(@story.Assigned)</div>
+                                <div class="assigned">@KanbanTracker.Account.User.GetUserFromId(@story.Assigned)</div>
                             </div>
                         </div>
                     }
                 }
-                
-                foreach (var bug in b)
+
+                foreach (Bug bug in b)
                 {
                     if (bug.Status == "complete")
                     {
@@ -263,7 +263,7 @@
                                 <div class="bug">Bug</div>
                                 <a class="elementTitle" href="/projects/bug_edit/@p.Id?storyId=@bug.Id"><h5>@bug.Title</h5></a>
                                 <p class="describe">@WordLimit(@bug.Description)</p>
-                                <div class="assigned">@KanbanTracker.Classes.User.GetUserFromId(@bug.Assigned)</div>
+                                <div class="assigned">@KanbanTracker.Account.User.GetUserFromId(@bug.Assigned)</div>
                             </div>
                         </div>
                     }
@@ -275,7 +275,7 @@
             <h4>(@acceptedCount) Accepted</h4>
             @if (true)
             {
-                foreach (var story in s)
+                foreach (Story story in s)
                 {
                     if (story.Status == "accepted")
                     {
@@ -284,13 +284,13 @@
                                 <div class="story">Story</div>
                                 <a class="elementTitle" href="/projects/story_edit/@p.Id?storyId=@story.Id"><h5>@story.Title</h5></a>
                                 <p class="describe">@WordLimit(@story.Description)</p>
-                                <div class="assigned">@KanbanTracker.Classes.User.GetUserFromId(@story.Assigned)</div>
+                                <div class="assigned">@KanbanTracker.Account.User.GetUserFromId(@story.Assigned)</div>
                             </div>
                         </div>
                     }
                 }
-                
-                foreach (var bug in b)
+
+                foreach (Bug bug in b)
                 {
                     if (bug.Status == "accepted")
                     {
@@ -299,14 +299,13 @@
                                 <div class="bug">Bug</div>
                                 <a class="elementTitle" href="/projects/bug_edit/@p.Id?storyId=@bug.Id"><h5>@bug.Title</h5></a>
                                 <p class="describe">@WordLimit(@bug.Description)</p>
-                                <div class="assigned">@KanbanTracker.Classes.User.GetUserFromId(@bug.Assigned)</div>
+                                <div class="assigned">@KanbanTracker.Account.User.GetUserFromId(@bug.Assigned)</div>
                             </div>
                         </div>
                     }
                 }
             }
         </div>
-
     }
     
     <a class="addStory" href="/projects/story_create/@p.Id">Add story</a>
@@ -314,24 +313,24 @@
 </div>
 <div class="content-wrapper">
     <h2>Recent Activity</h2><hr/>
-    @foreach (var comment in comments)
-            {
-                if (commentCount%2 == 0)
-                {
-                    <div class="evenComment">
-                        <p>@comment.Created, @comment.Description</p>
-                        <sup>@KanbanTracker.Classes.User.GetUserFromId(@comment.OwnerId)</sup>
-                    </div>
-                }
+    @foreach (Comment comment in comments)
+    {
+        if (commentCount%2 == 0)
+        {
+            <div class="evenComment">
+                <p>@comment.Created, @comment.Description</p>
+                <sup>@KanbanTracker.Account.User.GetUserFromId(@comment.OwnerId)</sup>
+            </div>
+        }
 
-                else
-                {
-                    <div class="oddComment">
-                        <p>@comment.Created, @comment.Description</p>
-                        <sup>@KanbanTracker.Classes.User.GetUserFromId(@comment.OwnerId)</sup>
-                    </div>
-                }
+        else
+        {
+            <div class="oddComment">
+                <p>@comment.Created, @comment.Description</p>
+                <sup>@KanbanTracker.Account.User.GetUserFromId(@comment.OwnerId)</sup>
+            </div>
+        }
 
-                commentCount++;
-            }
+        commentCount++;
+    }
 </div>

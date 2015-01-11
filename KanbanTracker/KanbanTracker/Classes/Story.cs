@@ -15,9 +15,8 @@ WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
 \***************************************************************************/
 
 namespace KanbanTracker.Classes
- {
-     public class Story : Task
-     {
-
-     }
- }
+{
+    public class Story : Task
+    {
+    }
+}

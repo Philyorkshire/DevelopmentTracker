@@ -38,7 +38,7 @@ namespace KanbanTracker.Test.ProjectControllerTest
         public ProjectStoriesTest()
         {
             _open = ProjectDb.Open();
-            _controller = new ProjectController { Request = new HttpRequestMessage() };
+            _controller = new ProjectController {Request = new HttpRequestMessage()};
             _controller.Request.SetConfiguration(new HttpConfiguration());
         }
 
@@ -73,10 +73,10 @@ namespace KanbanTracker.Test.ProjectControllerTest
         [TestMethod]
         public void GetAProjectStory()
         {
-            var project =  _open.FindOne();
+            var project = _open.FindOne();
             var story = project.Stories.FirstOrDefault();
 
-            if(story == null || story.Id == null) return;
+            if (story == null || story.Id == null) return;
 
             var request = _controller.GetAProjectStory(project.Id, story.Id);
 

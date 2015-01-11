@@ -15,12 +15,13 @@ WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
 \***************************************************************************/
 
 using System;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using KanbanTracker.Validation;
 using MongoDB.Bson;
 
-namespace KanbanTracker.Classes
+namespace KanbanTracker.Account
 {
     public class Auth : ActionFilterAttribute
     {
@@ -30,12 +31,12 @@ namespace KanbanTracker.Classes
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var httpCookie = filterContext.HttpContext.Request.Cookies.Get("sid");
+            HttpCookie httpCookie = filterContext.HttpContext.Request.Cookies.Get("sid");
 
             if (httpCookie != null && !string.IsNullOrEmpty(httpCookie.Value))
             {
-                var datetimeSid = (ObjectId.Parse(httpCookie.Value).CreationTime);
-                var duration = DateTime.Now - datetimeSid;
+                DateTime datetimeSid = (ObjectId.Parse(httpCookie.Value).CreationTime);
+                TimeSpan duration = DateTime.Now - datetimeSid;
 
                 if (duration.Minutes > 10 || !UserValidation.CheckSession(ObjectId.Parse(httpCookie.Value)))
                 {

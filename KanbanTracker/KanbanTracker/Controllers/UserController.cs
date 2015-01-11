@@ -18,7 +18,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using KanbanTracker.Classes;
+using KanbanTracker.Account;
 using KanbanTracker.Models;
 using KanbanTracker.Validation;
 using MongoDB.Bson;
@@ -28,7 +28,7 @@ namespace KanbanTracker.Controllers
 {
     public class UserController : ApiController
     {
-        private MongoCollection<User> _open;
+        private readonly MongoCollection<User> _open;
 
         public UserController()
         {
@@ -42,8 +42,9 @@ namespace KanbanTracker.Controllers
 
         public HttpResponseMessage GetUser(string id)
         {
-            var user = _open.FindOneById(ObjectId.Parse(id));
-            return user != null ? Request.CreateResponse(HttpStatusCode.OK, user)
+            User user = _open.FindOneById(ObjectId.Parse(id));
+            return user != null
+                ? Request.CreateResponse(HttpStatusCode.OK, user)
                 : Request.CreateErrorResponse(HttpStatusCode.NotFound, "User could not be found");
         }
 

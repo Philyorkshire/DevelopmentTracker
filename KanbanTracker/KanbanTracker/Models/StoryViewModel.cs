@@ -2,14 +2,14 @@
 
 namespace KanbanTracker.Models
 {
-    public class StoryViewModel 
+    public class StoryViewModel
     {
         [Required]
         [Display(Name = "Id")]
         public string Id { get; set; }
 
         [Display(Name = "ProjectId")]
-        public string ProjectId { get; set; }   
+        public string ProjectId { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
@@ -25,6 +25,6 @@ namespace KanbanTracker.Models
 
         [Required]
         [Display(Name = "Status")]
-        public string Status { get; set; } 
+        public string Status { get; set; }
     }
 }

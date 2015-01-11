@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using System.Web.Mvc;
+using KanbanTracker.Account;
 using KanbanTracker.Classes;
 using KanbanTracker.Models;
 using MongoDB.Bson;
@@ -46,7 +46,7 @@ namespace KanbanTracker.Controllers
                 @ViewBag.Info = (string.Format("Project created: {0}", project.Title));
             }
 
-            return RedirectToAction("index", "projects"); 
+            return RedirectToAction("index", "projects");
         }
 
         public ActionResult Create()
@@ -81,26 +81,26 @@ namespace KanbanTracker.Controllers
         public ActionResult Bug_Edit(string id, string storyId)
         {
             @ViewBag.id = id;
-            @ViewBag.bugId = storyId; 
-            return View(); 
+            @ViewBag.bugId = storyId;
+            return View();
         }
 
         [HttpPost]
         public RedirectToRouteResult Story_Edit(string id, StoryViewModel model)
         {
-            var project = _open.FindOneById(ObjectId.Parse(model.ProjectId));
-            var story = project.Stories.Find(s => s.Id == model.Id);
+            Project project = _open.FindOneById(ObjectId.Parse(model.ProjectId));
+            Story story = project.Stories.Find(s => s.Id == model.Id);
 
-            var status = model.Status != story.Status;
-            var description = model.Description != story.Description;
-            var assigned = model.Assigned != story.Assigned;
+            bool status = model.Status != story.Status;
+            bool description = model.Description != story.Description;
+            bool assigned = model.Assigned != story.Assigned;
 
             var comment = new Comment
             {
                 Id = ObjectId.GenerateNewId().ToString(),
                 Created = DateTime.Now,
                 Description = "",
-                OwnerId = Classes.User.CurrentUser.Id
+                OwnerId = Account.User.CurrentUser.Id
             };
 
             if (status)
@@ -118,12 +118,12 @@ namespace KanbanTracker.Controllers
             if (assigned)
             {
                 comment.Description += string.Format("Assigned changed from '{1}' => '{0}'. ",
-                    Classes.User.GetUserFromId(model.Assigned), Classes.User.GetUserFromId(story.Assigned));
+                    Account.User.GetUserFromId(model.Assigned), Account.User.GetUserFromId(story.Assigned));
             }
 
-                story.Status = model.Status;
-                story.Description = model.Description;
-                story.Assigned = model.Assigned;
+            story.Status = model.Status;
+            story.Description = model.Description;
+            story.Assigned = model.Assigned;
 
             if (comment.Description != "")
             {
@@ -133,25 +133,25 @@ namespace KanbanTracker.Controllers
 
             _open.Save(project);
 
-            return RedirectToAction("dashboard", "projects", new { id = model.ProjectId });
+            return RedirectToAction("dashboard", "projects", new {id = model.ProjectId});
         }
 
         [HttpPost]
         public RedirectToRouteResult Bug_Edit(string id, StoryViewModel model)
         {
-            var project = _open.FindOneById(ObjectId.Parse(model.ProjectId));
-            var bug = project.Bugs.Find(s => s.Id == model.Id);
+            Project project = _open.FindOneById(ObjectId.Parse(model.ProjectId));
+            Bug bug = project.Bugs.Find(s => s.Id == model.Id);
 
-            var status = model.Status != bug.Status;
-            var description = model.Description != bug.Description;
-            var assigned = model.Assigned != bug.Assigned;
+            bool status = model.Status != bug.Status;
+            bool description = model.Description != bug.Description;
+            bool assigned = model.Assigned != bug.Assigned;
 
             var comment = new Comment
             {
                 Id = ObjectId.GenerateNewId().ToString(),
                 Created = DateTime.Now,
                 Description = "",
-                OwnerId = Classes.User.CurrentUser.Id
+                OwnerId = Account.User.CurrentUser.Id
             };
 
             if (status)
@@ -169,7 +169,7 @@ namespace KanbanTracker.Controllers
             if (assigned)
             {
                 comment.Description += string.Format("Assigned changed from '{1}' => '{0}'. ",
-                    Classes.User.GetUserFromId(model.Assigned), Classes.User.GetUserFromId(bug.Assigned));
+                    Account.User.GetUserFromId(model.Assigned), Account.User.GetUserFromId(bug.Assigned));
             }
 
             bug.Status = model.Status;
@@ -184,37 +184,39 @@ namespace KanbanTracker.Controllers
 
             _open.Save(project);
 
-            return RedirectToAction("dashboard", "projects", new { id = model.ProjectId });
+            return RedirectToAction("dashboard", "projects", new {id = model.ProjectId});
         }
 
         public RedirectToRouteResult Story_Delete(string id, string storyId)
         {
             if (ModelState.IsValid)
             {
-                var query = Query.And(Query.EQ("_id", ObjectId.Parse(id)));
-                var update = Update.Pull("Stories", new BsonDocument{
-                             { "_id", ObjectId.Parse(storyId) }
+                IMongoQuery query = Query.And(Query.EQ("_id", ObjectId.Parse(id)));
+                UpdateBuilder update = Update.Pull("Stories", new BsonDocument
+                {
+                    {"_id", ObjectId.Parse(storyId)}
                 });
 
                 _open.Update(query, update);
             }
-            
-            return RedirectToAction("dashboard", "projects", new { id });
+
+            return RedirectToAction("dashboard", "projects", new {id});
         }
 
         public RedirectToRouteResult Bug_Delete(string id, string bugId)
         {
             if (ModelState.IsValid)
             {
-                var query = Query.And(Query.EQ("_id", ObjectId.Parse(id)));
-                var update = Update.Pull("Bugs", new BsonDocument{
-                             { "_id", ObjectId.Parse(bugId) }
+                IMongoQuery query = Query.And(Query.EQ("_id", ObjectId.Parse(id)));
+                UpdateBuilder update = Update.Pull("Bugs", new BsonDocument
+                {
+                    {"_id", ObjectId.Parse(bugId)}
                 });
 
                 _open.Update(query, update);
             }
 
-            return RedirectToAction("dashboard", "projects", new { id });
+            return RedirectToAction("dashboard", "projects", new {id});
         }
 
         [HttpPost]
@@ -233,7 +235,7 @@ namespace KanbanTracker.Controllers
                 Comments = new List<Comment>()
             };
 
-            var project = _open.FindOneById(ObjectId.Parse(id));
+            Project project = _open.FindOneById(ObjectId.Parse(id));
             project.Stories.Add(story);
             _open.Save(project);
 
@@ -242,7 +244,7 @@ namespace KanbanTracker.Controllers
         }
 
         [HttpPost]
-        public ActionResult Bug_Create(string id, BugViewModel model) 
+        public ActionResult Bug_Create(string id, BugViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
 
@@ -257,7 +259,7 @@ namespace KanbanTracker.Controllers
                 Comments = new List<Comment>()
             };
 
-            var project = _open.FindOneById(ObjectId.Parse(id));
+            Project project = _open.FindOneById(ObjectId.Parse(id));
             project.Bugs.Add(bug);
             _open.Save(project);
 
@@ -268,37 +270,36 @@ namespace KanbanTracker.Controllers
         [HttpPost]
         public RedirectToRouteResult Comment_Create(CommentViewModel model)
         {
-
-            var comment = new Comment 
+            var comment = new Comment
             {
                 Description = model.Description,
-                OwnerId = Classes.User.CurrentUser.Id,
+                OwnerId = Account.User.CurrentUser.Id,
                 Created = DateTime.Now
             };
 
-            var project = _open.FindOneById(ObjectId.Parse(model.ProjectId));
+            Project project = _open.FindOneById(ObjectId.Parse(model.ProjectId));
 
             if (model.ElementType != "bug")
             {
-                var element = project.Stories.Find(s => s.Id == model.ElementId);
+                Story element = project.Stories.Find(s => s.Id == model.ElementId);
                 element.Comments.Add(comment);
             }
 
             else
             {
-                var element = project.Bugs.Find(s => s.Id == model.ElementId);
+                Bug element = project.Bugs.Find(s => s.Id == model.ElementId);
                 element.Comments.Add(comment);
             }
 
             _open.Save(project);
 
-            return RedirectToAction("index", "projects"); 
+            return RedirectToAction("index", "projects");
         }
 
         public RedirectToRouteResult Delete(string id)
         {
             _open.Remove(new QueryDocument("_id", new BsonObjectId(new ObjectId(id))));
-            return RedirectToAction("index", "projects"); 
+            return RedirectToAction("index", "projects");
         }
 
         public ActionResult Story(string id, string storyId)
@@ -308,6 +309,5 @@ namespace KanbanTracker.Controllers
 
             return View();
         }
-
     }
 }

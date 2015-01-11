@@ -14,10 +14,10 @@ EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED
 WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
 \***************************************************************************/
 
-using System;
-using KanbanTracker.Classes;
+using KanbanTracker.Account;
 using KanbanTracker.Models;
 using MongoDB.Bson;
+using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 
 namespace KanbanTracker.Validation
@@ -26,8 +26,8 @@ namespace KanbanTracker.Validation
     {
         public static bool UserExists(string email)
         {
-            var users = UserDb.Open();
-            var count = users.FindAs<User>(Query.EQ("UserName", email)).Count();
+            MongoCollection<User> users = UserDb.Open();
+            long count = users.FindAs<User>(Query.EQ("UserName", email)).Count();
             return count > 0;
         }
 
@@ -35,9 +35,9 @@ namespace KanbanTracker.Validation
         {
             if (!UserExists(user.Email)) return false;
 
-            var users = UserDb.Open();
+            MongoCollection<User> users = UserDb.Open();
             var userFind = users.FindOneAs<User>(Query.EQ("UserName", user.Email));
-            var passwordVerify = PasswordHash.ValidatePassword(user.Password, userFind.PasswordHash);
+            bool passwordVerify = PasswordHash.ValidatePassword(user.Password, userFind.PasswordHash);
 
             if (passwordVerify)
             {
@@ -52,7 +52,7 @@ namespace KanbanTracker.Validation
 
         public static bool CheckSession(ObjectId sessionId)
         {
-            var users = UserDb.Open();
+            MongoCollection<User> users = UserDb.Open();
             var userFind = users.FindOneAs<User>(Query.EQ("SessionId", sessionId));
 
             if (userFind == null) return false;
@@ -63,7 +63,7 @@ namespace KanbanTracker.Validation
 
         public static string GetSession(LoginViewModel user)
         {
-            var users = UserDb.Open();
+            MongoCollection<User> users = UserDb.Open();
             var userFind = users.FindOneAs<User>(Query.EQ("UserName", user.Email));
 
             return userFind.SessionId;
@@ -71,7 +71,7 @@ namespace KanbanTracker.Validation
 
         public static void DestroySession(string sessionId)
         {
-            var users = UserDb.Open();
+            MongoCollection<User> users = UserDb.Open();
             var userFind = users.FindOneAs<User>(Query.EQ("SessionId", ObjectId.Parse(sessionId)));
             userFind.SessionId = null;
             users.Save(userFind);

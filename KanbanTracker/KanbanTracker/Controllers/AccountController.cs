@@ -13,13 +13,13 @@ THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,
 EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED 
 WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
 \***************************************************************************/
+
 using System;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-
-using KanbanTracker.Classes;
+using KanbanTracker.Account;
 using KanbanTracker.Models;
+using KanbanTracker.Validation;
 using MongoDB.Driver;
 
 namespace KanbanTracker.Controllers
@@ -47,10 +47,10 @@ namespace KanbanTracker.Controllers
 
         public ActionResult Logout()
         {
-            var httpCookie = HttpContext.Request.Cookies["sid"];
+            HttpCookie httpCookie = HttpContext.Request.Cookies["sid"];
             if (httpCookie != null && httpCookie.Value != string.Empty)
             {
-                Validation.UserValidation.DestroySession(httpCookie.Value);
+                UserValidation.DestroySession(httpCookie.Value);
                 httpCookie.Expires = DateTime.Now.AddDays(-1d);
                 Auth.Authenticated = false;
             }
@@ -64,9 +64,9 @@ namespace KanbanTracker.Controllers
         [ValidateAntiForgeryToken]
         public RedirectToRouteResult Login(LoginViewModel model)
         {
-            if (ModelState.IsValid && Validation.UserValidation.Login(model))
+            if (ModelState.IsValid && UserValidation.Login(model))
             {
-                Response.SetCookie(new HttpCookie("sid", Validation.UserValidation.GetSession(model)));
+                Response.SetCookie(new HttpCookie("sid", UserValidation.GetSession(model)));
                 Response.Cookies["sid"].Expires = DateTime.Now.AddMinutes(30);
 
                 @ViewBag.Info = (string.Format("Welcome, {0}", model.Email));
@@ -87,9 +87,9 @@ namespace KanbanTracker.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public ActionResult Register(RegisterViewModel model)
         {
-            if (ModelState.IsValid && !Validation.UserValidation.UserExists(model.Email))
+            if (ModelState.IsValid && !UserValidation.UserExists(model.Email))
             {
                 var user = new User
                 {

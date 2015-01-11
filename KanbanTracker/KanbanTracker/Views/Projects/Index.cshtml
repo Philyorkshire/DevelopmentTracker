@@ -1,7 +1,6 @@
 ﻿@using KanbanTracker.Classes
 @using KanbanTracker.Models
 @using MongoDB.Driver
-
 @functions {
     public MongoCollection<Project> Open;
 }
@@ -22,8 +21,9 @@
             <td></td>
         </tr>
     
-        @foreach (var project in Open.FindAll())
-        {   <tr>  
+        @foreach (Project project in Open.FindAll())
+        {
+            <tr>  
                 <td>@project.Title</td>
                 <td>@project.Description</td>
                 <td>@project.Created</td>

@@ -29,6 +29,7 @@ namespace KanbanTracker.Classes
         [BsonElement("_id")]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
+
         public string Title { get; set; }
         public string Description { get; set; }
 
@@ -46,7 +47,7 @@ namespace KanbanTracker.Classes
 
         public int DateUntilCompletion(DateTime date)
         {
-            var duration = DateTime.Now - date;
+            TimeSpan duration = DateTime.Now - date;
             return duration.Days;
         }
     }

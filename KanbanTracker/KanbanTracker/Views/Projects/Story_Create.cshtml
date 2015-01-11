@@ -1,4 +1,4 @@
-﻿@using KanbanTracker.Classes
+﻿@using KanbanTracker.Account
 @using KanbanTracker.Models
 @using MongoDB.Driver
 @model KanbanTracker.Models.StoryViewModel
@@ -15,26 +15,26 @@
     <section class="featured">
         <div class="content-wrapper">
             <hgroup class="title">
-            <h1>Create a new story</h1>
+                <h1>Create a new story</h1>
             </hgroup>
-            @using (Html.BeginForm("Story_Create", "Projects", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            @using (Html.BeginForm("Story_Create", "Projects", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
             {
                 @Html.AntiForgeryToken()
-                @Html.ValidationSummary("", new { @class = "text-danger" })
+                @Html.ValidationSummary("", new {@class = "text-danger"})
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Title, new { @class = "col-md-2 control-label" })
+                    @Html.LabelFor(m => m.Title, new {@class = "col-md-2 control-label"})
                     <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.Title, new {@class = "form-control"})
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Description, new { @class = "col-md-2 control-label" })
+                    @Html.LabelFor(m => m.Description, new {@class = "col-md-2 control-label"})
                     <div class="col-md-10">
-                        @Html.TextAreaFor(m => m.Description, new { @class = "form-control description" })
+                        @Html.TextAreaFor(m => m.Description, new {@class = "form-control description"})
                     </div>
                 </div>
-                
-               <div class="form-group">
+
+                <div class="form-group">
                     <label class="col-md-2 control-label" for="Status">Status</label>
                     <div class="col-md-10">
                         <select id="Status" name="Status">
@@ -48,15 +48,15 @@
                         </select>
                     </div>
                 </div>
-                
+
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Assigned, new { @class = "col-md-2 control-label" })
+                    @Html.LabelFor(m => m.Assigned, new {@class = "col-md-2 control-label"})
                     <div class="col-md-10">
                         <select name="Assigned">
-                        @foreach (var user in Open.FindAll())
-                        {
-                            <option value="@user.Id">@user.UserName</option>
-                        }
+                            @foreach (User user in Open.FindAll())
+                            {
+                                <option value="@user.Id">@user.UserName</option>
+                            }
                         </select>
                     </div>
                 </div>
