@@ -11,6 +11,17 @@ html {
     min-height: 200px;
 }
 
+.info-message {
+    padding-top: 10px;
+    text-align: center;
+    background-color: rgb(170, 67, 57);
+    color: white;
+    border-radius: 5px;
+    margin-top: -10px;
+    padding-bottom: 15px;
+    font-weight: bold;
+}
+
 .oddComment, .evenComment {
     padding: 10px;
 }

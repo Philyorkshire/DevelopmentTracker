@@ -218,55 +218,51 @@ namespace KanbanTracker.Controllers
         }
 
         [HttpPost]
-        public RedirectToRouteResult Story_Create(string id, StoryViewModel model)
+        public ActionResult Story_Create(string id, StoryViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return View(model);
+
+            var story = new Story
             {
-                var story = new Story
-                {
-                    Id = ObjectId.GenerateNewId().ToString(),
-                    Title = model.Title,
-                    Description = model.Description,
-                    Assigned = model.Assigned,
-                    Created = DateTime.Now,
-                    Status = model.Status,
-                    Comments = new List<Comment>()
-                };
+                Id = ObjectId.GenerateNewId().ToString(),
+                Title = model.Title,
+                Description = model.Description,
+                Assigned = model.Assigned,
+                Created = DateTime.Now,
+                Status = model.Status,
+                Comments = new List<Comment>()
+            };
 
-                var project = _open.FindOneById(ObjectId.Parse(id));
-                project.Stories.Add(story);
-                _open.Save(project);
+            var project = _open.FindOneById(ObjectId.Parse(id));
+            project.Stories.Add(story);
+            _open.Save(project);
 
-                @ViewBag.info = (string.Format("Story created: {0}", story.Title));
-            }
-
-            return RedirectToAction("index", "projects"); 
+            @ViewBag.info = (string.Format("Story created: {0}", story.Title));
+            return View("index");
         }
 
         [HttpPost]
-        public RedirectToRouteResult Bug_Create(string id, BugViewModel model) 
+        public ActionResult Bug_Create(string id, BugViewModel model) 
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return View(model);
+
+            var bug = new Bug
             {
-                var bug = new Bug
-                {
-                    Id = ObjectId.GenerateNewId().ToString(),
-                    Title = model.Title,
-                    Description = model.Description,
-                    Assigned = model.Assigned,
-                    Created = DateTime.Now,
-                    Status = model.Status,
-                    Comments = new List<Comment>()
-                };
+                Id = ObjectId.GenerateNewId().ToString(),
+                Title = model.Title,
+                Description = model.Description,
+                Assigned = model.Assigned,
+                Created = DateTime.Now,
+                Status = model.Status,
+                Comments = new List<Comment>()
+            };
 
-                var project = _open.FindOneById(ObjectId.Parse(id));
-                project.Bugs.Add(bug);
-                _open.Save(project);
+            var project = _open.FindOneById(ObjectId.Parse(id));
+            project.Bugs.Add(bug);
+            _open.Save(project);
 
-                @ViewBag.info = (string.Format("Bug created: {0}", bug.Title));
-            }
-
-            return RedirectToAction("index", "projects");
+            @ViewBag.info = (string.Format("Bug created: {0}", bug.Title));
+            return View("index");
         }
 
         [HttpPost]

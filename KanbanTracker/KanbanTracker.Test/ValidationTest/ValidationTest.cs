@@ -16,7 +16,6 @@ WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
 
 using KanbanTracker.Classes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using KanbanTracker.Validation;
 
 namespace KanbanTracker.Test.ValidationTest
 {
@@ -24,8 +23,6 @@ namespace KanbanTracker.Test.ValidationTest
     public class ValidationTest
     {
         private const string TestPassword = "testHashing";
-
-        public StoryValidation Validation;
 
         /// <summary>
         /// Validates a password hash can be created.

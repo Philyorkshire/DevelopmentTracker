@@ -11,7 +11,7 @@
 </head>
     <body>
         @Html.Partial("Header")
-        <div class="content-wrapper">@ViewBag.Info<h4>@Auth.Message</h4></div>
+        <div class="content-wrapper"><p class="info-message">@ViewBag.Info</p><h4>@Auth.Message</h4></div>
 
             @RenderBody()
 

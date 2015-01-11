@@ -10,8 +10,6 @@
     Open = ProjectDb.Open();
 }
 
-@*.Where(u => u.Owner == KanbanTracker.Classes.User.CurrentUser.Id)*@
-
 <div class="content-wrapper">
     <h1>Projects</h1>
     <table>
@@ -30,8 +28,8 @@
                 <td>@project.Description</td>
                 <td>@project.Created</td>
                 <td>@project.DueDate</td>
-                <td><a href="dashboard/@project.Id">View</a></td>
-                <td><a href="delete/@project.Id">Delete</a></td>
+                <td><a href="@Url.Action("dashboard", "projects")/@project.Id">View</a></td>
+                <td><a href="@Url.Action("delete", "projects")/@project.Id">Delete</a></td>
             </tr>
         }
     

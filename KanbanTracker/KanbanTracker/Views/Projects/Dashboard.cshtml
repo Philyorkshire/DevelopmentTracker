@@ -8,13 +8,9 @@
 
     public static string WordLimit(string text)
     {
-        if (text.Length > 70)
-        {
-            var output = text.Substring(0, Math.Min(text.Length, 70));
-            return output + "...";
-        }
-
-        return text;
+        if (text.Length <= 70) return text;
+        var output = text.Substring(0, Math.Min(text.Length, 70));
+        return output + "...";
     }
 }
 
